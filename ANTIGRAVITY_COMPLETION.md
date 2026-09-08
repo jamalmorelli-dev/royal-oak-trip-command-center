@@ -108,8 +108,15 @@ grep "NEXT_PUBLIC" .next/static/chunks/app/page-*.js
 
 **Status: VERIFIED** — departure unchanged, arrival corrected. Still recommended to re-verify in My Bookings 24–48h before return as standard practice.
 
+### Detroit Integration & Woodward Transit Spine (2026-09-08 Update)
+- **Fri Sep 18 (DIA + Dance City)**: Upgraded from generic flex/Zoo to Detroit Institute of Arts + Dance City Festival. DIA open until 9 PM Friday, with 5 PM Rivera Court live dance performance. Zoo retained as fallback only. Free admission with Tri-County (Oakland/Wayne/Macomb) ID or student documentation (Susu Royal Oak High).
+- **Sat Sep 19 (Full Detroit Loop)**: Mapped full father/daughter itinerary: Royal Oak → FAST Woodward bus → Guardian Building (free) → Campus Martius (free) → Detroit Riverwalk (free) → lunch → optional Eastern Market (free walk) → free QLINE streetcar back through Midtown → FAST Woodward back to Royal Oak.
+- **Tue Sep 22 (DIA Correction)**: Corrected scheduling bug: DIA closes at 4 PM on Tuesday; evening designated as casual Midtown/QLINE/Riverwalk fallback with NO DIA attempt.
+- **Transit Strategy**: Woodward corridor (FAST Woodward Routes 461/462 + free QLINE) established as default transit spine. Susu rides SMART fixed routes free ($0) with Royal Oak High School ID; Jam pays regular $2.00 SMART fare; QLINE is $0. Relegates Uber/Lyft to emergency/late-night fallback, saving $40–80 per Detroit excursion.
+- **Shortlist Additions**: Added DIA, Guardian Building, Campus Martius & Riverwalk, Eastern Market, and Dance City Festival to local shortlist with addresses, maps, and economics ($0 general admission with local/student ID).
+
 ### All Other Trip Data
-No changes. All flights, budget items, local shortlist entries, transport candidates, and daily plan rows preserved exactly as recovered from the original `app/data.js`.
+All flights, airfare, budget totals, and Royal Oak local basics preserved.
 
 ---
 

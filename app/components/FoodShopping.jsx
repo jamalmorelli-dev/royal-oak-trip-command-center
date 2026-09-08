@@ -4,12 +4,13 @@ import { trip } from '../data';
 import CopyButton from './CopyButton';
 import MapLink from './MapLink';
 
-const CATEGORIES = ['All', 'Groceries', 'Prepared/specialty', 'Clothes', 'Delivery'];
+const CATEGORIES = ['All', 'Detroit & Culture', 'Groceries', 'Prepared/specialty', 'Clothes', 'Delivery'];
 
 function categorize(type) {
   const t = type.toLowerCase();
+  if (t.includes('culture') || t.includes('art') || t.includes('waterfront') || t.includes('architecture') || t.includes('event')) return 'Detroit & Culture';
   if (t.includes('grocer')) return 'Groceries';
-  if (t.includes('prepared') || t.includes('specialty')) return 'Prepared/specialty';
+  if (t.includes('prepared') || t.includes('specialty') || t.includes('market')) return 'Prepared/specialty';
   if (t.includes('cloth') || t.includes('discount') || t.includes('cheap')) return 'Clothes';
   if (t.includes('delivery') || t.includes('food delivery')) return 'Delivery';
   return 'Other';
@@ -25,7 +26,7 @@ export default function FoodShopping() {
 
   return (
     <section className="card section" role="region" aria-label="Food and shopping">
-      <h2>Local operating shortlist</h2>
+      <h2>Local operating shortlist &amp; Detroit cultural stops</h2>
 
       <div className="filter-chips" role="group" aria-label="Filter by category">
         {CATEGORIES.map((cat) => (
@@ -46,16 +47,16 @@ export default function FoodShopping() {
             <tr>
               <th>Type</th>
               <th>Place</th>
-              <th>Area</th>
-              <th>Use</th>
-              <th>Target</th>
+              <th>Area / Address</th>
+              <th>Highlights &amp; Operating Use</th>
+              <th>Target / Economics</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
             {filtered.map((row, i) => (
               <tr key={i}>
-                <td>{row[0]}</td>
+                <td><span className="pill">{row[0]}</span></td>
                 <td><strong>{row[1]}</strong></td>
                 <td>
                   {row[2]}
@@ -68,7 +69,7 @@ export default function FoodShopping() {
                 </td>
                 <td>{row[3]}</td>
                 <td>
-                  <span className="muted">{row[4]}</span>
+                  <span className={row[4]?.includes('FREE') ? 'good' : 'muted'}>{row[4]}</span>
                 </td>
                 <td></td>
               </tr>
@@ -78,9 +79,9 @@ export default function FoodShopping() {
       </div>
 
       <p className="muted" style={{ marginTop: 12 }}>
-        Delivery pricing and availability can change. In-store or pickup is usually the cleaner budget move.
+        <strong>Note on DIA admission:</strong> Residents of Oakland, Wayne, and Macomb counties receive FREE general admission with qualifying ID. Susu attends Royal Oak High School (Oakland County), so show student documentation or Oakland County proof at the front desk.
         <br />
-        <em>Prices shown are estimates, not live quotes.</em>
+        <em>Delivery and shopping prices shown are estimates, not live quotes.</em>
       </p>
     </section>
   );

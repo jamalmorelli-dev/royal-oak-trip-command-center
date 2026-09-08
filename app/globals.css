@@ -142,6 +142,9 @@ th { color: #cfe0ff; }
 .row-warn {
   background: rgba(255, 209, 102, 0.06);
 }
+.row-spine {
+  background: rgba(120, 166, 255, 0.08);
+}
 
 /* === Sections === */
 .section { margin: 20px 0; }

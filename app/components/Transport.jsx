@@ -3,13 +3,13 @@ import { useState, useMemo } from 'react';
 import { trip } from '../data';
 import CopyButton from './CopyButton';
 
-const TRANSPORT_CATS = ['All', 'Bus/public', 'Private/contract', 'Rideshare'];
+const TRANSPORT_CATS = ['All', 'Bus / Transit Spine', 'School Contract / Private', 'Rideshare Fallback'];
 
 function categorizeTrans(option) {
   const o = option.toLowerCase();
-  if (o.includes('smart') || o.includes('bus')) return 'Bus/public';
-  if (o.includes('uber') || o.includes('lyft')) return 'Rideshare';
-  return 'Private/contract';
+  if (o.includes('smart') || o.includes('bus') || o.includes('woodward') || o.includes('qline') || o.includes('fast')) return 'Bus / Transit Spine';
+  if (o.includes('uber') || o.includes('lyft')) return 'Rideshare Fallback';
+  return 'School Contract / Private';
 }
 
 /**
@@ -31,7 +31,14 @@ export default function Transport() {
 
   return (
     <section className="card section" role="region" aria-label="Transport options">
-      <h2>School + local transport</h2>
+      <h2>School &amp; Woodward corridor transit</h2>
+
+      <div className="card" style={{ marginBottom: 16, borderColor: 'var(--accent)', background: 'rgba(120, 166, 255, 0.08)' }}>
+        <div style={{ fontWeight: 700, color: 'var(--accent)', marginBottom: 4 }}>🚆 Woodward Transit Spine Strategy</div>
+        <div style={{ fontSize: 14 }}>
+          Detroit is <strong>not</strong> an expensive $40–80 Uber trip. FAST Woodward (Route 461/462) runs straight down Woodward from Royal Oak to Downtown Detroit for $2.00 (Susu rides free with Royal Oak High School ID). In Detroit, the QLINE streetcar connects Downtown, Campus Martius, Midtown, and the DIA for <strong>$0 (100% free)</strong>. Uber/Lyft is strictly an emergency/late-night fallback.
+        </div>
+      </div>
 
       <div className="filter-chips" role="group" aria-label="Filter transport type">
         {TRANSPORT_CATS.map((cat) => (
@@ -57,17 +64,21 @@ export default function Transport() {
             <tr>
               <th>Option</th>
               <th>Price</th>
-              <th>Monthly / context</th>
+              <th>Route / Scope</th>
               <th>Notes</th>
             </tr>
           </thead>
           <tbody>
             {filtered.map((row, i) => {
               const phone = extractPhone(row[3]);
+              const isSpine = row[0].includes('FAST') || row[0].includes('QLINE') || row[0].includes('Student');
               return (
-                <tr key={i}>
-                  <td><strong>{row[0]}</strong></td>
-                  <td>{row[1]}</td>
+                <tr key={i} className={isSpine ? 'row-spine' : ''}>
+                  <td>
+                    <strong>{row[0]}</strong>
+                    {isSpine && <span className="pill good" style={{ marginLeft: 6, fontSize: 11 }}>Recommended Spine</span>}
+                  </td>
+                  <td className={row[1]?.includes('FREE') ? 'good' : ''}>{row[1]}</td>
                   <td>{row[2]}</td>
                   <td>
                     {row[3]}
