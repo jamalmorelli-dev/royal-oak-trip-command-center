@@ -5,11 +5,13 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "next build && touch out/.nojekyll",
+    "deploy": "next build && touch out/.nojekyll && cd out && git init && git checkout -b gh-pages && git add -A && git commit -m 'Deploy to GitHub Pages' && git remote add origin https://github.com/jamalmorelli-dev/royal-oak-trip-command-center.git && git push -f origin gh-pages",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "15.5.2",
+    "next": "15.5.25",
     "openai": "5.19.1",
     "react": "19.1.1",
     "react-dom": "19.1.1"
