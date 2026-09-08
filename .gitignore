@@ -1,0 +1,23 @@
+# dependencies
+node_modules/
+
+# next.js build
+.next/
+out/
+
+# environment files (keep .env.example only)
+.env
+.env.local
+.env.*.local
+
+# logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

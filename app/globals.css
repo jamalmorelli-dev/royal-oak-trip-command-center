@@ -1,0 +1,363 @@
+/* === Royal Oak Trip Command Center — Global Styles === */
+
+:root {
+  --bg: #0b1020;
+  --card: #11182d;
+  --ink: #f5f7fb;
+  --muted: #aeb8d0;
+  --line: #263352;
+  --accent: #78a6ff;
+  --good: #75d39b;
+  --warn: #ffd166;
+  --bad: #ff7b7b;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #080d1a, #11182d);
+  color: var(--ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+a { color: var(--accent); }
+button, input, textarea, select { font: inherit; }
+
+/* === Layout === */
+.wrap { max-width: 1250px; margin: auto; padding: 24px; }
+.hero { display: grid; gap: 12px; margin: 14px 0 22px; }
+.hero h1 { font-size: clamp(30px, 5vw, 58px); line-height: .95; margin: 0; }
+.muted { color: var(--muted); }
+
+/* === Skip link (accessibility) === */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  background: var(--accent);
+  color: #071225;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 700;
+  z-index: 100;
+  text-decoration: none;
+}
+.skip-link:focus {
+  top: 16px;
+}
+
+/* === Screen-reader only === */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* === Tabs === */
+.tabs {
+  display: flex;
+  gap: 8px;
+  overflow: auto;
+  position: sticky;
+  top: 0;
+  background: rgba(11, 16, 32, .94);
+  padding: 10px 0;
+  z-index: 5;
+  backdrop-filter: blur(12px);
+  -webkit-overflow-scrolling: touch;
+}
+
+.tabs button {
+  background: #16213d;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 9px 13px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+
+.tabs button:hover {
+  background: #1e2d52;
+}
+
+.tabs button.active {
+  background: var(--accent);
+  color: #071225;
+}
+
+.tabs button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* === Grid + Cards === */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 12px;
+}
+
+.card {
+  background: rgba(17, 24, 45, .92);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 16px;
+}
+
+.kpi { font-size: 30px; font-weight: 800; }
+.label { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+
+/* === Tables === */
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th, td { padding: 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+th { color: #cfe0ff; }
+
+/* === Status colors === */
+.good { color: var(--good); }
+.warn { color: var(--warn); }
+.bad { color: var(--bad); }
+
+/* === Warning box === */
+.warn-box {
+  background: rgba(255, 209, 102, 0.08);
+  border: 1px solid var(--warn);
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+
+/* === Row states === */
+.row-done {
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+.row-warn {
+  background: rgba(255, 209, 102, 0.06);
+}
+
+/* === Sections === */
+.section { margin: 20px 0; }
+.section h2 { margin: 0 0 10px; }
+
+/* === Toolbar === */
+.toolbar { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+
+.toolbar button {
+  border: 0;
+  border-radius: 12px;
+  background: var(--accent);
+  color: #071225;
+  font-weight: 700;
+  padding: 11px 16px;
+  cursor: pointer;
+  transition: opacity .15s;
+}
+
+.toolbar button:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.toolbar button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.toolbar button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.btn-secondary {
+  background: #16213d !important;
+  color: var(--ink) !important;
+  border: 1px solid var(--line) !important;
+}
+
+/* === AI Concierge === */
+.ai textarea {
+  width: 100%;
+  min-height: 100px;
+  background: #0f1730;
+  color: white;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px;
+  resize: vertical;
+}
+
+.ai textarea:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 0;
+  border-color: var(--accent);
+}
+
+.answer {
+  white-space: pre-wrap;
+  margin-top: 12px;
+  background: #0c1429;
+  border-radius: 12px;
+  padding: 12px;
+  min-height: 50px;
+}
+
+.error-box {
+  border: 1px solid var(--bad);
+  background: rgba(255, 123, 123, 0.08);
+  color: var(--bad);
+}
+
+/* === Copy button === */
+.copy-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  border-radius: 6px;
+  padding: 2px 6px;
+  margin-left: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  vertical-align: middle;
+  transition: color .15s, border-color .15s;
+}
+
+.copy-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.copy-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* === Map link === */
+.map-link {
+  display: inline-flex;
+  margin-left: 4px;
+  text-decoration: none;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+/* === Filter chips === */
+.filter-chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.chip {
+  background: #16213d;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background .15s;
+}
+
+.chip:hover {
+  background: #1e2d52;
+}
+
+.chip.active {
+  background: var(--accent);
+  color: #071225;
+}
+
+.chip:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* === Budget actual input === */
+.actual-input {
+  width: 90px;
+  background: #0f1730;
+  color: white;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 8px;
+  font-size: 13px;
+}
+
+.actual-input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 0;
+  border-color: var(--accent);
+}
+
+/* === Checkbox styling === */
+input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--accent);
+}
+
+/* === Spinner === */
+.spinner {
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* === Focus-visible for all interactive elements === */
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* === kbd styling === */
+kbd {
+  background: #1a2440;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 12px;
+  font-family: inherit;
+}
+
+/* === Flight refs === */
+.flight-refs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+/* === Mobile responsive — NO hidden columns, use scroll instead === */
+@media (max-width: 700px) {
+  .wrap { padding: 14px; }
+  .hero h1 { font-size: clamp(26px, 7vw, 40px); }
+  .grid { grid-template-columns: 1fr; }
+  .kpi { font-size: 24px; }
+
+  /* Tables scroll horizontally instead of hiding columns */
+  table { min-width: 600px; }
+
+  .flight-refs {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
