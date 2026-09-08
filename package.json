@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "export": "next build && touch out/.nojekyll",
-    "deploy": "next build && touch out/.nojekyll && cd out && git init && git checkout -b gh-pages && git add -A && git commit -m 'Deploy to GitHub Pages' && git remote add origin https://github.com/jamalmorelli-dev/royal-oak-trip-command-center.git && git push -f origin gh-pages",
+    "deploy": "rm -rf out && next build && touch out/.nojekyll && cd out && git init -b gh-pages && git add -A && git commit -m 'Deploy to GitHub Pages' && git push -f https://github.com/jamalmorelli-dev/royal-oak-trip-command-center.git gh-pages",
     "start": "next start",
     "lint": "next lint"
   },
