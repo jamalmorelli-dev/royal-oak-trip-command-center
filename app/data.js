@@ -16,6 +16,44 @@ export const trip = {
     ['Sep 25', 'DL 8271 / AF1258', 'Air France', 'Paris CDG', '11:15 AM', 'Rabat RBA', '1:10 PM', 'VERIFIED 2026-09-08 — was 12:10 PM; updated per Morocco UTC+1 legal-time change. Re-verify 24–48h before return.']
   ],
   baggage: 'Carry-on + first + second checked bags free; checked bags up to 50 lb / 23 kg each.',
+
+  plane: {
+    checkInOpens: 'Sun Sep 13, 2026 — about 10:35 AM Morocco time (24h before RBA departure)',
+    departureTarget: 'Mon Sep 14 — leave Fès about 4:45–5:00 AM; target RBA by 7:00–7:30 AM',
+    airportRule: 'Rabat departure may require collecting the boarding pass at the Air France airport desk even after online check-in.',
+    primaryFlight: 'DL 8491 / Air France — RBA 10:35 AM → CDG 2:40 PM',
+    connection: 'DL 8719 / Air France — CDG 4:05 PM → DTW 6:50 PM',
+    checkin: [
+      ['Physical passport', 'CRITICAL', 'Carry on your person; ticket name is BENJAMIN PRENTISS. Never place passport in checked baggage.'],
+      ['Passport scan/photo', 'BACKUP', 'Save the photo page offline on the phone plus one separate backup location.'],
+      ['Delta itinerary / receipt', 'PRINT + OFFLINE', 'Confirmation G82B6L; ticket 0062455565576. Print one copy and save screenshots/PDF offline.'],
+      ['Online check-in', 'DO SEP 13', 'Attempt as soon as the airline opens check-in. Enter passport details exactly and confirm both outbound segments.'],
+      ['Boarding passes', 'AIRPORT BACKUP', 'Save any mobile passes, screenshot them, and collect paper boarding passes at RBA if required.'],
+      ['Checked-bag routing', 'ASK AT RBA', 'Confirm the bag tag destination is DTW, not CDG.'],
+      ['Bag weight', 'BEFORE LEAVING FÈS', 'Ticket currently shows first and second checked bags free, each up to 23 kg / 50 lb.'],
+      ['Carry-on essentials', 'CRITICAL', 'Passport, medication, wallet/cards/cash, phone, charger/power bank and essential documents stay in carry-on.'],
+      ['Security prep', 'READY', 'Liquids/security rules; power banks stay in carry-on; keep laptop/tablet accessible.'],
+      ['Phone readiness', 'READY', 'Fully charged; Delta/Air France access; offline screenshots of itinerary, confirmation, ticket number and boarding passes.']
+    ],
+    nightBefore: [
+      'Passport physically in travel wallet',
+      'Phone fully charged',
+      'Wallet/cards/cash',
+      'Printed itinerary/receipt',
+      'Carry-on packed and weighed',
+      'Checked bags weighed and tagged with contact info',
+      'Alarm(s) set for Fès departure',
+      'Car/driver to RBA confirmed'
+    ],
+    rbaSequence: [
+      ['~7:00–7:30 AM', 'Arrive RBA with a large buffer.'],
+      ['Immediately', 'Go to Air France desk; passport/document check; collect paper boarding pass if required.'],
+      ['Bag drop', 'Confirm checked bag is tagged through to DTW.'],
+      ['Security / exit control', 'Proceed immediately after check-in; do not linger landside.'],
+      ['Gate', 'Re-check gate/boarding time on airport screens and airline app.'],
+      ['10:35 AM', 'DL8491 scheduled departure to Paris CDG.']
+    ]
+  },
   budget: [
     ['Airfare', 1412.26],
     ['Groceries', 299],

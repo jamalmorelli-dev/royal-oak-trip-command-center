@@ -364,3 +364,26 @@ kbd {
     align-items: flex-start;
   }
 }
+
+/* === Checklist for Night Before & Tasks === */
+.checklist {
+  display: grid;
+  gap: 10px;
+}
+
+.checklist label {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  background: #0f1730;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 11px;
+  transition: background .15s, border-color .15s;
+}
+
+.checklist input {
+  margin-top: 3px;
+  transform: scale(1.15);
+}
+

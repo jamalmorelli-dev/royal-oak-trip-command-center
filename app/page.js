@@ -2,6 +2,7 @@
 import './globals.css';
 import { useState } from 'react';
 import Dashboard from './components/Dashboard';
+import PlaneChecklist from './components/PlaneChecklist';
 import TodayView from './components/TodayView';
 import DailyPlan from './components/DailyPlan';
 import Flights from './components/Flights';
@@ -10,7 +11,7 @@ import Transport from './components/Transport';
 import Budget from './components/Budget';
 import AIConcierge from './components/AIConcierge';
 
-const tabs = ['Dashboard', 'Today', 'Daily Plan', 'Flights', 'Food & Shopping', 'Transport', 'Budget', 'AI Concierge'];
+const tabs = ['Dashboard', 'Plane Checklist', 'Today', 'Daily Plan', 'Flights', 'Food & Shopping', 'Transport', 'Budget', 'AI Concierge'];
 
 export default function Home() {
   const [tab, setTab] = useState('Dashboard');
@@ -45,6 +46,7 @@ export default function Home() {
 
       <div id="main-content" role="tabpanel" aria-label={tab}>
         {tab === 'Dashboard' && <Dashboard />}
+        {tab === 'Plane Checklist' && <PlaneChecklist />}
         {tab === 'Today' && <TodayView />}
         {tab === 'Daily Plan' && <DailyPlan />}
         {tab === 'Flights' && <Flights />}
