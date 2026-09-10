@@ -80,7 +80,17 @@ export default function PlaneChecklist() {
               <strong>{trip.confirmation}</strong>
               <CopyButton text={trip.confirmation} label="confirmation number" />
             </div>
-            <div style={{ marginLeft: 12 }}>
+            <div style={{ marginLeft: 10 }}>
+              <span className="label">First: </span>
+              <strong>Benjamin</strong>
+              <CopyButton text="Benjamin" label="first name" />
+            </div>
+            <div style={{ marginLeft: 10 }}>
+              <span className="label">Last: </span>
+              <strong>Prentiss</strong>
+              <CopyButton text="Prentiss" label="last name" />
+            </div>
+            <div style={{ marginLeft: 10 }}>
               <span className="label">Ticket: </span>
               <strong>{trip.ticket}</strong>
               <CopyButton text={trip.ticket} label="ticket number" />
@@ -88,7 +98,7 @@ export default function PlaneChecklist() {
           </div>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
             <a
-              href="https://www.delta.com/mytrips/"
+              href="https://www.delta.com/my-trips/search?staticurl=t"
               target="_blank"
               rel="noopener noreferrer"
               className="toolbar button"
@@ -104,9 +114,9 @@ export default function PlaneChecklist() {
                 fontWeight: 700,
                 fontSize: 13,
               }}
-              title="Open Delta My Trips / Check-in in new tab"
+              title="Open Delta Find Your Trip search form in new tab"
             >
-              Delta My Trips ↗
+              Delta Find Your Trip ↗
             </a>
             <a
               href="https://wwws.airfrance.com/check-in"

@@ -9,13 +9,50 @@ export default function Flights() {
     <section className="card section" role="region" aria-label="Flights">
       <h2>Confirmed itinerary</h2>
 
-      <div className="flight-refs" style={{ marginBottom: 16 }}>
-        <span className="label">Confirmation: </span>
-        <strong>{trip.confirmation}</strong>
-        <CopyButton text={trip.confirmation} label="confirmation number" />
-        <span style={{ marginLeft: 16 }} className="label">Ticket: </span>
-        <strong>{trip.ticket}</strong>
-        <CopyButton text={trip.ticket} label="ticket number" />
+      <div className="flight-refs" style={{ marginBottom: 16, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
+        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 10 }}>
+          <div>
+            <span className="label">Confirmation: </span>
+            <strong>{trip.confirmation}</strong>
+            <CopyButton text={trip.confirmation} label="confirmation number" />
+          </div>
+          <div>
+            <span className="label">First: </span>
+            <strong>Benjamin</strong>
+            <CopyButton text="Benjamin" label="first name" />
+          </div>
+          <div>
+            <span className="label">Last: </span>
+            <strong>Prentiss</strong>
+            <CopyButton text="Prentiss" label="last name" />
+          </div>
+          <div>
+            <span className="label">Ticket: </span>
+            <strong>{trip.ticket}</strong>
+            <CopyButton text={trip.ticket} label="ticket number" />
+          </div>
+        </div>
+        <a
+          href="https://www.delta.com/my-trips/search?staticurl=t"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="toolbar button"
+          style={{
+            textDecoration: 'none',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 6,
+            padding: '7px 12px',
+            borderRadius: 10,
+            background: 'var(--accent)',
+            color: '#071225',
+            fontWeight: 700,
+            fontSize: 13,
+          }}
+          title="Open Delta Find Your Trip search form in new tab"
+        >
+          Delta Find Your Trip ↗
+        </a>
       </div>
 
       <div style={{ overflowX: 'auto' }}>
