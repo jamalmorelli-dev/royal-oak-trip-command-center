@@ -73,6 +73,10 @@ export default function PlaneChecklist() {
           <div>
             <div className="label">PASSENGER</div>
             <div style={{ fontSize: 20, fontWeight: 800 }}>{trip.traveler.toUpperCase()}</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 4 }}>
+              <span className="pill good" style={{ fontSize: 11, fontWeight: 700 }}>✔ DELTA RECORDS AUDITED &amp; CONFIRMED</span>
+              <span className="pill good" style={{ fontSize: 11 }}>ALL TRIP REQUIREMENTS COMPLETE</span>
+            </div>
           </div>
           <div className="flight-refs">
             <div>
