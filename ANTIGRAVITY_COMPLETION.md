@@ -138,6 +138,10 @@ Both sources are preserved. Neither was silently overwritten.
 
 The app displays the data.js values with a note about the XLSX discrepancies. The XLSX workbook is a more detailed model with line-item breakdowns, sub-categories, and priority rankings. The data.js is the app's working snapshot. A future iteration could import the XLSX structure directly.
 
+### Explicit Data & Branding Exclusions (Per Jam's Instructions)
+- **School Branding Excluded:** "ROHS", "Royal Oak Ravens", and "Blue & Silver" are explicitly omitted from all app UI, labels, and text.
+- **Personal / Household Reimbursement Items Excluded:** Individual reimbursement receipts (e.g. 2026-09-10 Trader Joe's Fresh Groceries for Soraya $53.75, Target Art & Notebook Supplies $24.30) are strictly kept OFF the trip command center app; they remain tracked on the private Google Sheet only.
+
 ---
 
 ## 6. Security Check
