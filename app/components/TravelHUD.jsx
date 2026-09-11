@@ -2,6 +2,8 @@
 import { useState, useEffect, useMemo } from "react";
 import { trip } from "../data";
 import CopyButton from "./CopyButton";
+import { useOnlineStatus } from "../hooks/useOnlineStatus";
+import { downloadTripCalendar } from "../lib/calendar";
 import {
   TRIP_TIMEZONES,
   KEY_DATES,
@@ -38,6 +40,8 @@ export default function TravelHUD({ onSelectTab, activeTab }) {
     { num: 5, label: "Return to Rabat", dates: "Sep 24–25", id: "RETURN_TRAVEL" },
   ];
 
+  const isOnline = useOnlineStatus();
+
   return (
     <header className="hud-container" role="banner" aria-label="Live Travel Heads-Up Display">
       {/* Top Credentials & Quick Action HUD */}
@@ -47,6 +51,15 @@ export default function TravelHUD({ onSelectTab, activeTab }) {
           <div className="hud-name">
             <strong>{trip.traveler.toUpperCase()}</strong>
             <span className="hud-verified-tag" title="Delta booking audited and active">✔ VERIFIED</span>
+            {isOnline ? (
+              <span className="pill good" style={{ fontSize: 10, padding: "1px 7px" }} title="Connected to network">
+                🟢 ONLINE
+              </span>
+            ) : (
+              <span className="pill warn pulse-badge" style={{ fontSize: 10, padding: "1px 7px" }} title="Operating in offline airplane mode">
+                ✈️ OFFLINE (LOCAL CACHE)
+              </span>
+            )}
           </div>
         </div>
 
@@ -92,6 +105,14 @@ export default function TravelHUD({ onSelectTab, activeTab }) {
           >
             Air France Check-in ↗
           </a>
+          <button
+            type="button"
+            onClick={downloadTripCalendar}
+            className="hud-btn hud-btn-outline"
+            title="Download iCalendar file (.ics) with automated check-in and flight alarms"
+          >
+            📅 Add to Calendar (.ics)
+          </button>
           <button
             type="button"
             onClick={() => typeof window !== "undefined" && window.print()}
