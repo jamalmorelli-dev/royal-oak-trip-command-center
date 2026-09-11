@@ -1,8 +1,19 @@
 'use client';
-import { useState, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { trip } from '../data';
 import CopyButton from './CopyButton';
 import { usePersistedState } from '../hooks/usePersistedState';
+
+function getTimeRemaining(targetDate, nowDate) {
+  const ms = targetDate.getTime() - nowDate.getTime();
+  if (ms <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0, total: 0 };
+  const totalSeconds = Math.floor(ms / 1000);
+  const days = Math.floor(totalSeconds / 86400);
+  const hours = Math.floor((totalSeconds % 86400) / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+  return { days, hours, minutes, seconds, total: ms };
+}
 
 export default function PlaneChecklist() {
   const plane = trip.plane;
@@ -12,9 +23,25 @@ export default function PlaneChecklist() {
   // Persisted state for user manual check-in status override
   const [userCheckedIn, setUserCheckedIn] = usePersistedState('ro-plane-user-checked-in', false);
 
-  // Determine check-in window status:
+  // Live timer tick for real-time countdowns
+  const [now, setNow] = useState(() => new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setNow(new Date());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
   // Outbound flight DL8491 departs Mon Sep 14, 2026 at 10:35 AM Morocco time (Africa/Casablanca = UTC+1).
   // Check-in opens 24h before: Sun Sep 13, 2026 at 10:35 AM Africa/Casablanca.
+  const checkInOpenTime = useMemo(() => new Date('2026-09-13T10:35:00+01:00'), []);
+  const departureTime = useMemo(() => new Date('2026-09-14T10:35:00+01:00'), []);
+
+  const timeToCheckIn = useMemo(() => getTimeRemaining(checkInOpenTime, now), [checkInOpenTime, now]);
+  const timeToDeparture = useMemo(() => getTimeRemaining(departureTime, now), [departureTime, now]);
+
+  // Determine check-in window status:
   const checkInStatus = useMemo(() => {
     if (userCheckedIn) {
       return {
@@ -23,12 +50,6 @@ export default function PlaneChecklist() {
         detail: 'You have marked check-in as completed.',
       };
     }
-
-    const now = new Date();
-    // Sep 13, 2026 10:35:00 UTC+1 = 2026-09-13T09:35:00Z
-    const checkInOpenTime = new Date('2026-09-13T10:35:00+01:00');
-    // Sep 14, 2026 10:35:00 UTC+1
-    const departureTime = new Date('2026-09-14T10:35:00+01:00');
 
     if (now < checkInOpenTime) {
       return {
@@ -39,7 +60,7 @@ export default function PlaneChecklist() {
     } else if (now >= checkInOpenTime && now <= departureTime) {
       return {
         label: 'OPEN — CHECK IN NOW',
-        cls: 'warn',
+        cls: 'warn pulse-badge',
         detail: 'Airline check-in window is OPEN. Check in online immediately and save boarding passes.',
       };
     } else {
@@ -49,7 +70,7 @@ export default function PlaneChecklist() {
         detail: 'Flight scheduled departure time has passed.',
       };
     }
-  }, [userCheckedIn]);
+  }, [userCheckedIn, now, checkInOpenTime, departureTime]);
 
   function toggleNight(index) {
     setNightChecked((prev) => ({
@@ -141,6 +162,24 @@ export default function PlaneChecklist() {
             >
               Air France Check-in ↗
             </a>
+            <button
+              type="button"
+              onClick={() => typeof window !== 'undefined' && window.print()}
+              className="toolbar button btn-secondary no-print"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 6,
+                padding: '8px 14px',
+                borderRadius: 10,
+                fontWeight: 700,
+                fontSize: 13,
+                cursor: 'pointer',
+              }}
+              title="Print physical travel one-pager emergency backup"
+            >
+              🖨 Print Travel One-Pager
+            </button>
           </div>
         </div>
       </div>
@@ -152,7 +191,27 @@ export default function PlaneChecklist() {
           <div className={`kpi ${checkInStatus.cls}`} style={{ fontSize: 22, marginTop: 4 }}>
             {checkInStatus.label}
           </div>
-          <div className="muted" style={{ fontSize: 13, marginTop: 4 }}>
+          {timeToCheckIn.total > 0 && !userCheckedIn && (
+            <div className="timer-grid">
+              <div className="timer-unit">
+                <span className="timer-val">{timeToCheckIn.days}</span>
+                <span className="timer-lbl">Days</span>
+              </div>
+              <div className="timer-unit">
+                <span className="timer-val">{timeToCheckIn.hours}</span>
+                <span className="timer-lbl">Hours</span>
+              </div>
+              <div className="timer-unit">
+                <span className="timer-val">{timeToCheckIn.minutes}</span>
+                <span className="timer-lbl">Mins</span>
+              </div>
+              <div className="timer-unit">
+                <span className="timer-val">{timeToCheckIn.seconds}</span>
+                <span className="timer-lbl">Secs</span>
+              </div>
+            </div>
+          )}
+          <div className="muted" style={{ fontSize: 13, marginTop: 6 }}>
             {checkInStatus.detail}
           </div>
           <div style={{ marginTop: 8 }}>
@@ -170,10 +229,32 @@ export default function PlaneChecklist() {
         <div className="card">
           <div className="label">MONDAY DEPARTURE</div>
           <div className="kpi">10:35 AM</div>
-          <div className="muted" style={{ fontSize: 13, marginTop: 4 }}>
+          {timeToDeparture.total > 0 ? (
+            <div className="timer-grid">
+              <div className="timer-unit">
+                <span className="timer-val">{timeToDeparture.days}</span>
+                <span className="timer-lbl">Days</span>
+              </div>
+              <div className="timer-unit">
+                <span className="timer-val">{timeToDeparture.hours}</span>
+                <span className="timer-lbl">Hours</span>
+              </div>
+              <div className="timer-unit">
+                <span className="timer-val">{timeToDeparture.minutes}</span>
+                <span className="timer-lbl">Mins</span>
+              </div>
+              <div className="timer-unit">
+                <span className="timer-val">{timeToDeparture.seconds}</span>
+                <span className="timer-lbl">Secs</span>
+              </div>
+            </div>
+          ) : (
+            <span className="pill muted" style={{ marginTop: 6, display: 'inline-block' }}>Wheels Up</span>
+          )}
+          <div className="muted" style={{ fontSize: 13, marginTop: 6 }}>
             {plane.primaryFlight}
           </div>
-          <div className="muted" style={{ fontSize: 12, marginTop: 4 }}>
+          <div className="muted" style={{ fontSize: 12, marginTop: 2 }}>
             Connection: {plane.connection}
           </div>
         </div>

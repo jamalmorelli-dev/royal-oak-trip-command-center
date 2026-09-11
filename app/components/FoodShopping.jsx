@@ -18,15 +18,58 @@ function categorize(type) {
 
 export default function FoodShopping() {
   const [filter, setFilter] = useState('All');
+  const [searchTerm, setSearchTerm] = useState('');
 
   const filtered = useMemo(() => {
-    if (filter === 'All') return trip.local;
-    return trip.local.filter((row) => categorize(row[0]) === filter);
-  }, [filter]);
+    let list = trip.local;
+    if (filter !== 'All') {
+      list = list.filter((row) => categorize(row[0]) === filter);
+    }
+    if (searchTerm.trim()) {
+      const q = searchTerm.toLowerCase();
+      list = list.filter((row) =>
+        row.some((field) => typeof field === 'string' && field.toLowerCase().includes(q))
+      );
+    }
+    return list;
+  }, [filter, searchTerm]);
 
   return (
     <section className="card section" role="region" aria-label="Food and shopping">
-      <h2>Local operating shortlist &amp; Detroit cultural stops</h2>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8, marginBottom: 8 }}>
+        <h2 style={{ margin: 0 }}>Local operating shortlist &amp; Detroit cultural stops</h2>
+        <span className="pill" style={{ fontSize: 12 }}>
+          Showing {filtered.length} of {trip.local.length} spots
+        </span>
+      </div>
+
+      <div className="search-bar no-print">
+        <span aria-hidden="true" style={{ opacity: 0.6 }}>🔍</span>
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Search places, addresses, highlights, food, coffee, art, transit..."
+          aria-label="Search spots and places"
+        />
+        {searchTerm && (
+          <button
+            type="button"
+            onClick={() => setSearchTerm('')}
+            style={{
+              background: 'transparent',
+              border: 0,
+              color: 'var(--muted)',
+              cursor: 'pointer',
+              fontSize: 14,
+              padding: '0 4px',
+            }}
+            title="Clear search"
+          >
+            ✕
+          </button>
+        )}
+      </div>
 
       <div className="filter-chips" role="group" aria-label="Filter by category">
         {CATEGORIES.map((cat) => (
