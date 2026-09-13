@@ -5,11 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "export": "next build && touch out/.nojekyll",
-    "deploy": "rm -rf out && next build && touch out/.nojekyll && cd out && git init -b gh-pages && git add -A && git commit -m 'Deploy to GitHub Pages' && git push -f https://github.com/jamalmorelli-dev/royal-oak-trip-command-center.git gh-pages",
-    "check-flight": "node bin/check-flight.js",
     "start": "next start",
-    "lint": "next lint"
+    "check-flight": "node bin/check-flight.js",
+    "lint": "next lint",
+    "deploy": "node -e \"console.error('STOP: Airport Docs private vault requires a server-capable Next.js host. Do not deploy this branch to GitHub Pages. Follow GROK_BUILD_PUBLISH.md.'); process.exit(1)\""
   },
   "dependencies": {
     "next": "15.5.25",
