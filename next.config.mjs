@@ -1,9 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-  basePath: '/royal-oak-trip-command-center',
   images: {
     unoptimized: true,
+  },
+  // Private vault documents exist only in the secure deployment context, never in public Git.
+  outputFileTracingIncludes: {
+    '/api/vault/file': ['./private_docs/**/*'],
   },
 };
 
