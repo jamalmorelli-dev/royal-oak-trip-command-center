@@ -1,5 +1,6 @@
 'use client';
 import './globals.css';
+import './airport.css';
 import './currentTripUpdate';
 import { useState } from 'react';
 import CurrentTravelHUD from './components/CurrentTravelHUD';
