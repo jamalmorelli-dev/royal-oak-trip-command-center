@@ -23,3 +23,6 @@ Thumbs.db
 .idea/
 .vercel
 diagnostics/
+
+# Sensitive travel identity documents — deployment package only, never Git
+private_docs/
