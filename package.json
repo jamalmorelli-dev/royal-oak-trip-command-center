@@ -5,10 +5,13 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:pwa": "node scripts/generate-icons.js && node scripts/build-pwa.js",
     "start": "next start",
     "check-flight": "node bin/check-flight.js",
     "lint": "next lint",
-    "deploy": "node -e \"console.error('STOP: Airport Docs private vault requires a server-capable Next.js host. Do not deploy this branch to GitHub Pages. Follow GROK_BUILD_PUBLISH.md.'); process.exit(1)\""
+    "icons": "node scripts/generate-icons.js",
+    "test": "vitest run",
+    "deploy": "npm run build:pwa && node scripts/publish-gh-pages.js"
   },
   "dependencies": {
     "next": "15.5.25",

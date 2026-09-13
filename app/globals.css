@@ -205,6 +205,12 @@ button, input, textarea, select {
   flex-wrap: wrap;
 }
 
+.pwa-install {
+  display: inline-flex;
+  align-items: center;
+  max-width: 220px;
+}
+
 .hud-btn {
   display: inline-flex;
   align-items: center;

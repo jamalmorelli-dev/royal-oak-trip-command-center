@@ -26,5 +26,19 @@ This repository is public. Therefore:
 - Vault responses use server routes and are excluded from service-worker caching.
 - Offline private copies are saved only when the owner explicitly asks the app to store them in that browser's IndexedDB.
 
+## PWA
+This app is an installable Progressive Web App (`manifest.json`, PNG icons, service worker).
+
+```bash
+npm run build:pwa   # public static PWA in out/ — Grok Build / Grok Bot publish this
+npm run build       # server PWA with optional private vault
+```
+
+Grok Build / Grok Bot: follow `GROK_BUILD_PUBLISH.md`. Publish the **public PWA**. Never commit `private_docs/`.
+
+On iPhone: open the HTTPS URL → Share → **Add to Home Screen**.
+On Android/Chrome: **Install app** / Install Trip HQ.
+
 ## Deployment
-The private vault requires a **server-capable Next.js host** such as Vercel/Node. Do not deploy this branch as a static GitHub Pages export. Read `GROK_BUILD_PUBLISH.md` and `GROK_BUILD_AIRPORT_DOCS_2026-09-13.md` before publishing.
+- **Public PWA (default):** `npm run build:pwa` then publish `out/` to HTTPS (GitHub Pages or Grok static host).
+- **Private vault:** only on a server-capable host that can inject `private_docs/` off-Git. See `GROK_BUILD_PUBLISH.md`.
