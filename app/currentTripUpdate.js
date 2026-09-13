@@ -14,6 +14,7 @@ trip.baggage = 'Original Delta receipt: carry-on FREE + first checked bag FREE u
 trip.airportDocs = [
   { id:'checkin', title:'Air France check-in confirmation', kind:'PRIVATE', privateKey:'checkin', filename:'AirFrance_CheckIn_Confirmation.pdf', description:'Official successful check-in confirmation for both outbound segments. It is NOT the boarding pass.' },
   { id:'passport', title:'U.S. passport copy', kind:'PRIVATE', privateKey:'passport', filename:'Benjamin_Prentiss_Passport.jpeg', description:'Backup identity-page image. The original passport is mandatory and stays on your person.' },
+  { id:'deltaref', title:'Delta receipt + baggage reference', kind:'PRIVATE', privateKey:'deltaref', filename:'Delta_Receipt_Baggage_Reference.txt', description:'Receipt-derived flight, ticket and two-free-checked-bag reference for counter questions.' },
   { id:'tempdl', title:'PennDOT temporary license / camera card', kind:'PRIVATE', privateKey:'tempdl', filename:'PennDOT_Temporary_License_Camera_Card.pdf', description:'Driving/rental backup. Temporary paper is valid only through Sep 17.' },
   { id:'dlfront', title:'Prior PA photo credential — front', kind:'PRIVATE', privateKey:'dlfront', filename:'PA_Driver_License_Front.jpeg', description:'Photo/record-matching backup for rental review.' },
   { id:'dlback', title:'Prior PA photo credential — back', kind:'PRIVATE', privateKey:'dlback', filename:'PA_Driver_License_Back.jpeg', description:'Back image of prior PA credential.' },
