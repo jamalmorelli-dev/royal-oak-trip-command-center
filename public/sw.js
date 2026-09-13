@@ -1,62 +1,79 @@
-/**
- * Royal Oak Trip Command Center — Service Worker
- * Provides offline caching so the full itinerary, flight credentials,
- * and emergency guide remain accessible in Airplane Mode or low-connectivity.
- */
+/** Royal Oak Trip HQ PWA — never cache private vault or concierge APIs. */
+const CACHE_NAME = 'royal-oak-trip-pwa-v3';
 
-const CACHE_NAME = "royal-oak-trip-v1";
-const ASSETS_TO_CACHE = [
-  "./",
-  "./index.html",
-  "./manifest.json",
-  "./icon.svg"
-];
+function scopeUrl(rel) {
+  return new URL(rel, self.registration.scope).toString();
+}
 
-self.addEventListener("install", (event) => {
+function isPrivateApi(url) {
+  return url.pathname.includes('/api/vault') || url.pathname.includes('/api/concierge');
+}
+
+self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS_TO_CACHE).catch(() => {});
-    })
-  );
-  self.skipWaiting();
-});
-
-self.addEventListener("activate", (event) => {
-  event.waitUntil(
-    caches.keys().then((keys) => {
-      return Promise.all(
-        keys.map((key) => {
-          if (key !== CACHE_NAME) {
-            return caches.delete(key);
-          }
-        })
+    (async () => {
+      const cache = await caches.open(CACHE_NAME);
+      const precache = [
+        './',
+        './manifest.json',
+        './icon-192.png',
+        './icon-512.png',
+        './apple-touch-icon.png',
+        './icon.svg',
+        './travel-docs/PRINTING_RULES.txt',
+      ].map(scopeUrl);
+      await Promise.all(
+        precache.map((u) => cache.add(u).catch(() => null))
       );
-    })
+      self.skipWaiting();
+    })()
   );
-  self.clients.claim();
 });
 
-self.addEventListener("fetch", (event) => {
-  if (event.request.method !== "GET") return;
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    (async () => {
+      const keys = await caches.keys();
+      await Promise.all(keys.map((k) => (k === CACHE_NAME ? null : caches.delete(k))));
+      await self.clients.claim();
+    })()
+  );
+});
+
+self.addEventListener('fetch', (event) => {
+  const req = event.request;
+  if (req.method !== 'GET') return;
+  const url = new URL(req.url);
+  if (url.origin !== self.location.origin) return;
+  if (isPrivateApi(url)) return;
 
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      const fetchPromise = fetch(event.request)
-        .then((networkResponse) => {
-          if (networkResponse && networkResponse.status === 200) {
-            const responseToCache = networkResponse.clone();
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(event.request, responseToCache);
-            });
-          }
-          return networkResponse;
-        })
-        .catch(() => {
-          // Offline fallback
-          return cachedResponse;
-        });
+    (async () => {
+      const cache = await caches.open(CACHE_NAME);
+      const isNav = req.mode === 'navigate';
+      const isNextStatic = url.pathname.includes('/_next/static/');
 
-      return cachedResponse || fetchPromise;
-    })
+      if (isNextStatic) {
+        const cached = await cache.match(req);
+        if (cached) return cached;
+        const res = await fetch(req);
+        if (res && res.ok) cache.put(req, res.clone()).catch(() => {});
+        return res;
+      }
+
+      try {
+        const res = await fetch(req);
+        if (res && res.ok) cache.put(req, res.clone()).catch(() => {});
+        return res;
+      } catch (err) {
+        const cached = await cache.match(req);
+        if (cached) return cached;
+        if (isNav) {
+          const home = await cache.match(scopeUrl('./'));
+          if (home) return home;
+        }
+        throw err;
+      }
+    })()
   );
 });
