@@ -1,0 +1,11 @@
+export const runtime='nodejs';
+export const dynamic='force-dynamic';
+import { NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
+import { readFile } from 'fs/promises';
+import path from 'path';
+import { createHmac, timingSafeEqual } from 'crypto';
+const DOCS={checkin:['AirFrance_CheckIn_Confirmation.pdf','application/pdf'],passport:['Benjamin_Prentiss_Passport.jpeg','image/jpeg'],tempdl:['PennDOT_Temporary_License_Camera_Card.pdf','application/pdf'],dlfront:['PA_Driver_License_Front.jpeg','image/jpeg'],dlback:['PA_Driver_License_Back.jpeg','image/jpeg'],penndotverify:['PennDOT_Record_Verification.txt','text/plain; charset=utf-8'],penndotreceipt:['PennDOT_Duplicate_Receipt.pdf','application/pdf'],employment:['Talk_Today_Employment_Verification_Benjamin_Prentiss.pdf','application/pdf'],meta:['Travel_Vault_Metadata.json','application/json; charset=utf-8'],tripref:['Travel_Vault_Metadata.json','application/json; charset=utf-8']};
+function token(pin,secret){return createHmac('sha256',secret).update(`royal-oak-travel-vault:v1:${pin}`).digest('hex')}
+function eq(a,b){const x=Buffer.from(String(a)),y=Buffer.from(String(b));return x.length===y.length&&timingSafeEqual(x,y)}
+export async function GET(request){const pin=process.env.TRAVEL_VAULT_PIN,secret=process.env.TRAVEL_VAULT_SECRET;if(!pin||!secret)return NextResponse.json({error:'Private Travel Vault is not configured.'},{status:503});const cs=await cookies();if(!eq(cs.get('travel_vault')?.value||'',token(pin,secret)))return NextResponse.json({error:'Vault locked.'},{status:401});const key=new URL(request.url).searchParams.get('name');const entry=DOCS[key];if(!entry)return NextResponse.json({error:'Unknown document.'},{status:404});try{const [filename,type]=entry;const bytes=await readFile(path.join(process.cwd(),'private_docs',filename));return new NextResponse(bytes,{headers:{'Content-Type':type,'Content-Disposition':`inline; filename="${filename}"`,'Cache-Control':'private, no-store, max-age=0','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer'}})}catch{return NextResponse.json({error:'Document unavailable in this build.'},{status:404})}}
