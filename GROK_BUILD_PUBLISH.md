@@ -1,7 +1,7 @@
 # GROK BUILD — SEP 13 AIRPORT DOCS + PRIVATE VAULT
 
 ## Mission
-Take branch `grok-airport-docs-2026-09-13`, production-build it, add the private deployment files from the secure handoff package, and deploy it on a **server-capable Next.js host**. Do not use GitHub Pages/static export for this branch.
+Take branch `grok-airport-docs-2026-09-13`, add the private deployment files from the secure handoff package, complete the vault/mobile/offline acceptance tests, and deploy on a **server-capable Next.js host**. Do not use GitHub Pages/static export for this branch.
 
 The owner flies tomorrow: **Sep 14, RBA 10:35 → CDG → DTW**.
 
@@ -27,6 +27,14 @@ The owner flies tomorrow: **Sep 14, RBA 10:35 → CDG → DTW**.
 - Service worker explicitly excludes `/api/vault/*` from cache.
 - Public source contains no passport/license images or exact Detroit contact card.
 
+## Build status already verified
+GitHub Actions **Grok Airport Build Gate** completed successfully on Sep 13:
+- `npm ci`: PASS
+- `npm run build`: PASS
+- sensitive-file Git guard: PASS
+
+Do not remove that guard.
+
 ## SECURITY — NON-NEGOTIABLE
 The repository is public.
 
@@ -46,6 +54,7 @@ A separate secure ZIP is supplied outside public GitHub. It contains `private_do
 Expected private files:
 - `AirFrance_CheckIn_Confirmation.pdf`
 - `Benjamin_Prentiss_Passport.jpeg`
+- `Delta_Receipt_Baggage_Reference.txt`
 - `PennDOT_Temporary_License_Camera_Card.pdf`
 - `PA_Driver_License_Front.jpeg`
 - `PA_Driver_License_Back.jpeg`
@@ -56,27 +65,23 @@ Expected private files:
 
 If the host can only deploy from public GitHub and cannot safely inject these private files, **STOP**. Do not upload the identity documents to GitHub as a workaround. Use a secure private build context or private object storage/server storage.
 
-## Production gate
+## Remaining production gate
 Before publishing the owner URL:
-1. `npm install`
-2. `npm run build` — must pass.
-3. Test ~390px mobile width and desktop.
-4. Dashboard says **CHECK-IN COMPLETE** and **BOARDING PASS — RBA DESK**.
-5. Airport Docs shows seats 22D / 38H and current boarding/departure times.
-6. Without unlock, `/api/vault/file?name=passport` returns **401**.
-7. Wrong PIN returns **401**.
-8. Correct PIN unlocks and sets an HttpOnly session cookie.
-9. After unlock, every private document opens.
-10. Confirm no private file appears in Git, `/public`, page source, client JS, service-worker cache, or logs.
-11. Test **Save ALL docs offline** on the owner's device/browser; turn network off and verify saved documents still open from IndexedDB.
-12. Confirm the Air France PDF clearly remains labeled as **not a boarding pass**.
-13. Confirm printing language: **nothing self-printed is required for the flight; original passport is mandatory; boarding pass comes from Air France at RBA**.
-14. Confirm the separate PennDOT temporary paper print/sign reminder.
-15. Confirm Flights tab does not resurrect the stale AF1258 return time.
-16. Verify concierge server key is not client-visible.
-
-## Container limitation already identified
-The handoff environment could statically parse all added JS/JSX successfully, but its DNS could not reach npm (`EAI_AGAIN`), so it could not honestly run `npm install` / `next build`. Grok Build must perform the real production build and treat any build error as a blocker.
+1. Deploy the successful branch build with the private payload in a secure server build context.
+2. Test ~390px mobile width and desktop.
+3. Dashboard says **CHECK-IN COMPLETE** and **BOARDING PASS — RBA DESK**.
+4. Airport Docs shows seats 22D / 38H and current boarding/departure times.
+5. Without unlock, `/api/vault/file?name=passport` returns **401**.
+6. Wrong PIN returns **401**.
+7. Correct PIN unlocks and sets an HttpOnly session cookie.
+8. After unlock, every private document opens.
+9. Confirm no private file appears in Git, `/public`, page source, client JS, service-worker cache, or logs.
+10. Test **Save ALL docs offline** on the owner's device/browser; turn network off and verify saved documents still open from IndexedDB.
+11. Confirm the Air France PDF remains labeled as **not a boarding pass**.
+12. Confirm printing language: **nothing self-printed is required for the flight; original passport is mandatory; boarding pass comes from Air France at RBA**.
+13. Confirm the separate PennDOT temporary paper print/sign reminder.
+14. Confirm Flights tab does not resurrect the stale AF1258 return time.
+15. Verify concierge server key is not client-visible.
 
 ## Finish line
-Return the production URL, successful build output, vault test results, mobile/offline test results, and confirmation that private docs never entered public Git history.
+Return the production URL, vault test results, mobile/offline test results, and confirmation that private docs never entered public Git history.
