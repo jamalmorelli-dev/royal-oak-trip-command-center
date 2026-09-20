@@ -17,8 +17,8 @@ import AIConcierge from './components/AIConcierge';
 
 const TAB_ITEMS=[
   {id:'Dashboard',label:'Dashboard',icon:'📊'},
-  {id:'Airport Docs',label:'Airport Docs',icon:'🛂',badge:'READY'},
-  {id:'Plane Checklist',label:'Plane Checklist',icon:'✈️',badge:'CHECKED IN'},
+  {id:'Airport Docs',label:'Airport Docs',icon:'🛂'},
+  {id:'Plane Checklist',label:'Return Prep',icon:'✈️',badge:'SEP 24'},
   {id:'Today',label:'Today',icon:'📅',live:true},
   {id:'Daily Plan',label:'Daily Plan',icon:'🗺️'},
   {id:'Flights',label:'Flights',icon:'🛫'},
