@@ -74,3 +74,20 @@ trip.plane = {
     ['10:35 AM','DL8491 scheduled departure.']
   ]
 };
+
+
+// Sep 20 Detroit live-phase update.
+trip.hostArea = 'Royal Oak host area';
+trip.currentPhase = {
+  date: 'Sun Sep 20, 2026',
+  status: 'IN ROYAL OAK',
+  headline: 'Sunday reset + Royal Oak Antiques & Collectibles Market',
+  next: 'Royal Oak Farmers Market • 316 E 11 Mile Rd • open today 8:00 AM–3:00 PM',
+  later: 'Soraya flag-football film study • 6:00–7:00 PM',
+  returnFlight: 'DL228 • Thu Sep 24 • DTW 6:40 PM → CDG',
+  departurePrep: 'Target leaving Royal Oak about 3:15–3:30 PM on Sep 24 for DTW.'
+};
+const sep20 = trip.days.findIndex(d => d[0].startsWith('Sep 20'));
+if (sep20 >= 0) {
+  trip.days[sep20] = ['Sep 20 Sun','Royal Oak reset day + Antiques & Collectibles Market','Cook at home / simple local food','Grocery top-up only if needed','Royal Oak Farmers Market antiques 8 AM–3 PM; reset/laundry/admin; Soraya flag-football film study 6–7 PM','Walk/local rides','$55'];
+}
