@@ -1,0 +1,42 @@
+name: Grok Airport Build Gate
+
+on:
+  push:
+    branches:
+      - grok-airport-docs-2026-09-13
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Production build
+        run: npm run build
+        env:
+          TRAVEL_VAULT_PIN: test-pin-only
+          TRAVEL_VAULT_SECRET: test-secret-for-ci-only-32-characters-minimum-12345
+          OPENAI_API_KEY: sk-test-placeholder-not-used
+
+      - name: Guard against committed private travel documents
+        shell: bash
+        run: |
+          if git ls-files | grep -E '(^|/)private_docs/|Benjamin_Prentiss_Passport|PA_Driver_License_(Front|Back)|PennDOT_Temporary_License_Camera_Card'; then
+            echo 'Sensitive travel document detected in Git history for this branch.' >&2
+            exit 1
+          fi
+          echo 'No prohibited private travel-document paths are tracked.'

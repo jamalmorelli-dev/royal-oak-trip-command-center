@@ -4,6 +4,7 @@ node_modules/
 # next.js build
 .next/
 out/
+.api-stash/
 
 # environment files (keep .env.example only)
 .env
@@ -23,3 +24,6 @@ Thumbs.db
 .idea/
 .vercel
 diagnostics/
+
+# Sensitive travel identity documents — deployment package only, never Git
+private_docs/
