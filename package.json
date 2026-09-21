@@ -13,6 +13,7 @@
     "sentinel": "node bin/trip-sentinel.js",
     "check-off": "node bin/trip-sentinel.js --check",
     "check-flight": "node bin/check-flight.js",
+    "checkin:return": "node bin/auto-checkin-return.js",
     "start": "next start",
     "lint": "next lint"
   },
