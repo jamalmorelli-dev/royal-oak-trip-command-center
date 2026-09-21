@@ -109,8 +109,11 @@ export default function Dashboard({ onSelectTab }) {
           </div>
 
           <div style={{ background: "rgba(14, 21, 38, 0.6)", padding: 14, borderRadius: 12, border: "1px solid var(--line)" }}>
-            <div style={{ fontWeight: 700, color: "var(--accent)", marginBottom: 4 }}>
-              🎭 Fri Sep 18: DIA + Dance City
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
+              <div style={{ fontWeight: 700, color: "var(--accent)" }}>
+                🎭 Fri Sep 18: DIA + Dance City
+              </div>
+              <span className="pill good" style={{ fontSize: 9 }}>✔ COMPLETED</span>
             </div>
             <div className="muted" style={{ fontSize: 13 }}>
               DIA open till 9 PM Fri. 5 PM Rivera Court performance. Free general admission with Tri-County / student ID.
@@ -118,20 +121,44 @@ export default function Dashboard({ onSelectTab }) {
           </div>
 
           <div style={{ background: "rgba(14, 21, 38, 0.6)", padding: 14, borderRadius: 12, border: "1px solid var(--line)" }}>
-            <div style={{ fontWeight: 700, color: "var(--accent)", marginBottom: 4 }}>
-              🌟 Sat Sep 19: Full Detroit Loop
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
+              <div style={{ fontWeight: 700, color: "var(--accent)" }}>
+                🌟 Sat Sep 19: Full Detroit Loop
+              </div>
+              <span className="pill good" style={{ fontSize: 9 }}>✔ COMPLETED</span>
             </div>
             <div className="muted" style={{ fontSize: 13 }}>
               FAST Woodward → Guardian Bldg → Campus Martius → Riverwalk → Free QLINE → opt. Eastern Market. Zero Uber waste.
             </div>
           </div>
 
-          <div style={{ background: "rgba(14, 21, 38, 0.6)", padding: 14, borderRadius: 12, border: "1px solid var(--line)" }}>
-            <div style={{ fontWeight: 700, color: "var(--accent)", marginBottom: 4 }}>
-              ℹ️ Tue Sep 22: Detroit Evening (No DIA)
+          <div style={{ background: "rgba(14, 21, 38, 0.8)", padding: 14, borderRadius: 12, border: "2px solid var(--warn)" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
+              <div style={{ fontWeight: 700, color: "var(--warn)" }}>
+                ℹ️ Tue Sep 22: Detroit Evening (No DIA)
+              </div>
+              <span className="pill warn pulse-badge" style={{ fontSize: 9 }}>NEXT UP</span>
             </div>
             <div className="muted" style={{ fontSize: 13 }}>
-              DIA closes 4 PM Tue. Evening is reserved for casual Midtown/downtown/Riverwalk via SMART + QLINE.
+              DIA closes 4 PM Tue (NO DIA). Evening is reserved for casual Midtown/downtown/Riverwalk stroll via SMART + QLINE.
+            </div>
+          </div>
+
+          <div style={{ background: "rgba(14, 21, 38, 0.6)", padding: 14, borderRadius: 12, border: "1px solid var(--line)" }}>
+            <div style={{ fontWeight: 700, color: "var(--good)", marginBottom: 4 }}>
+              ✈️ Wed Sep 23: Return Check-In (6:40 PM)
+            </div>
+            <div className="muted" style={{ fontSize: 13 }}>
+              Check-in window opens exactly 24h prior for flight DL 228 (DTW → CDG). Re-verify AF 1258 connection.
+            </div>
+          </div>
+
+          <div style={{ background: "rgba(14, 21, 38, 0.6)", padding: 14, borderRadius: 12, border: "1px solid var(--line)" }}>
+            <div style={{ fontWeight: 700, color: "var(--bad)", marginBottom: 4 }}>
+              🛫 Thu Sep 24: Departure Day (DTW 6:40 PM)
+            </div>
+            <div className="muted" style={{ fontSize: 13 }}>
+              Pack &amp; weigh bags (2x 23kg free). Leave Royal Oak ~3:15–3:30 PM for DTW McNamara Terminal.
             </div>
           </div>
 
@@ -140,16 +167,7 @@ export default function Dashboard({ onSelectTab }) {
               🛒 Groceries &amp; Meals
             </div>
             <div className="muted" style={{ fontSize: 13 }}>
-              2 grocery runs (main Meijer stock-up + top-up). Max 4 takeout orders. Reserve cash for Detroit dining.
-            </div>
-          </div>
-
-          <div style={{ background: "rgba(14, 21, 38, 0.6)", padding: 14, borderRadius: 12, border: "1px solid var(--line)" }}>
-            <div style={{ fontWeight: 700, color: "var(--accent)", marginBottom: 4 }}>
-              👕 Clothes &amp; Essentials
-            </div>
-            <div className="muted" style={{ fontSize: 13 }}>
-              Target + Meijer on Tue Sep 15. Salvation Army / Citi Trends fallback.
+              Cook home meals to conserve envelope. Max 4 takeout orders. Reserve cash for Detroit dining &amp; celebratory dinner.
             </div>
           </div>
         </div>
@@ -158,19 +176,8 @@ export default function Dashboard({ onSelectTab }) {
       {/* Quick Access Cockpit Launchers */}
       {onSelectTab && (
         <section className="section no-print" role="region" aria-label="Quick launch section">
-          <h3 style={{ margin: "0 0 10px", fontSize: 15, color: "var(--muted)" }}>QUICK NAVIGATION</h3>
+          <h3 style={{ margin: "0 0 10px", fontSize: 15, color: "var(--muted)" }}>QUICK NAVIGATION (WHAT'\''S COMING UP)</h3>
           <div className="grid">
-            <button
-              type="button"
-              className="card"
-              onClick={() => onSelectTab("Plane Checklist")}
-              style={{ textAlign: "left", cursor: "pointer", border: "1px solid var(--card-border)" }}
-            >
-              <div style={{ fontSize: 20 }}>✈️</div>
-              <div style={{ fontWeight: 700, color: "var(--ink-bright)", marginTop: 4 }}>Plane Checklist</div>
-              <div className="muted" style={{ fontSize: 12 }}>Check-in status, passport rules, packing list</div>
-            </button>
-
             <button
               type="button"
               className="card"
@@ -178,19 +185,19 @@ export default function Dashboard({ onSelectTab }) {
               style={{ textAlign: "left", cursor: "pointer", border: "1px solid var(--card-border)" }}
             >
               <div style={{ fontSize: 20 }}>📅</div>
-              <div style={{ fontWeight: 700, color: "var(--ink-bright)", marginTop: 4 }}>Today's Briefing</div>
-              <div className="muted" style={{ fontSize: 12 }}>Active schedule, countdowns &amp; day budget</div>
+              <div style={{ fontWeight: 700, color: "var(--ink-bright)", marginTop: 4 }}>Today &amp; 72h Runway</div>
+              <div className="muted" style={{ fontSize: 12 }}>Mon Sep 21 today plan, Tue 22 Detroit stroll, Wed 23 check-in</div>
             </button>
 
             <button
               type="button"
               className="card"
-              onClick={() => onSelectTab("Food & Shopping")}
+              onClick={() => onSelectTab("Plane Checklist")}
               style={{ textAlign: "left", cursor: "pointer", border: "1px solid var(--card-border)" }}
             >
-              <div style={{ fontSize: 20 }}>🛍️</div>
-              <div style={{ fontWeight: 700, color: "var(--ink-bright)", marginTop: 4 }}>Detroit &amp; Food Shortlist</div>
-              <div className="muted" style={{ fontSize: 12 }}>DIA, Guardian, Riverwalk, groceries &amp; search</div>
+              <div style={{ fontSize: 20 }}>✈️</div>
+              <div style={{ fontWeight: 700, color: "var(--ink-bright)", marginTop: 4 }}>Return Flight (DTW)</div>
+              <div className="muted" style={{ fontSize: 12 }}>Return check-in window countdown, bag rules, packing list</div>
             </button>
 
             <button
@@ -200,8 +207,19 @@ export default function Dashboard({ onSelectTab }) {
               style={{ textAlign: "left", cursor: "pointer", border: "1px solid var(--card-border)" }}
             >
               <div style={{ fontSize: 20 }}>🚌</div>
-              <div style={{ fontWeight: 700, color: "var(--ink-bright)", marginTop: 4 }}>Woodward Transit Cheat Sheet</div>
+              <div style={{ fontWeight: 700, color: "var(--ink-bright)", marginTop: 4 }}>Detroit &amp; Transit Guide</div>
               <div className="muted" style={{ fontSize: 12 }}>FAST bus routes, QLINE, SMART student free fare</div>
+            </button>
+
+            <button
+              type="button"
+              className="card"
+              onClick={() => onSelectTab("Budget")}
+              style={{ textAlign: "left", cursor: "pointer", border: "1px solid var(--card-border)" }}
+            >
+              <div style={{ fontSize: 20 }}>💳</div>
+              <div style={{ fontWeight: 700, color: "var(--ink-bright)", marginTop: 4 }}>Budget &amp; Costs</div>
+              <div className="muted" style={{ fontSize: 12 }}>Final week expense tracking, variance &amp; actuals</div>
             </button>
           </div>
         </section>

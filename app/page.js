@@ -13,19 +13,19 @@ import Budget from "./components/Budget";
 import AIConcierge from "./components/AIConcierge";
 
 const TAB_ITEMS = [
-  { id: "Dashboard", label: "Dashboard", icon: "📊" },
-  { id: "Plane Checklist", label: "Plane Checklist", icon: "✈️", badge: "T-2d" },
-  { id: "Today", label: "Today", icon: "📅", live: true },
+  { id: "Today", label: "Today & Runway", icon: "📅", live: true, badge: "Sep 21" },
+  { id: "Plane Checklist", label: "Return Flight (DTW)", icon: "✈️", badge: "In 2d" },
+  { id: "Transport", label: "Detroit & Transit", icon: "🚌", badge: "Tue Eve" },
   { id: "Daily Plan", label: "Daily Plan", icon: "🗺️" },
-  { id: "Flights", label: "Flights", icon: "🛫" },
+  { id: "Budget", label: "Budget & Costs", icon: "💳" },
   { id: "Food & Shopping", label: "Food & Spots", icon: "🛍️" },
-  { id: "Transport", label: "Transport", icon: "🚌" },
-  { id: "Budget", label: "Budget", icon: "💳" },
+  { id: "Dashboard", label: "Trip Overview", icon: "📊" },
+  { id: "Flights", label: "All Flights", icon: "🛫" },
   { id: "AI Concierge", label: "AI Concierge", icon: "🤖" },
 ];
 
 export default function Home() {
-  const [tab, setTab] = useState("Dashboard");
+  const [tab, setTab] = useState("Today");
 
   return (
     <main className="wrap">

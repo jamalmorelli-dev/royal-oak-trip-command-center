@@ -121,16 +121,31 @@ export function getTripPhase(nowDate = new Date()) {
   }
 
   if (now >= endOfTravelDay && now < returnFlight) {
+    const returnCheckIn = new Date(KEY_DATES.returnCheckInOpen);
+    const returnDep = new Date(KEY_DATES.returnDeparture);
+    const timeToRetCheckIn = getTimeRemaining(returnCheckIn, now);
+    const timeToRetDep = getTimeRemaining(returnDep, now);
+
+    let headline = "Royal Oak Residency • Final Week";
+    let desc = "Daily school routine, Tue evening Detroit stroll, and return check-in opening Wed Sep 23 @ 6:40 PM EDT (" + timeToRetCheckIn.days + "d " + timeToRetCheckIn.hours + "h remaining).";
+    let actionText = "View Today & Runway";
+
+    if (now >= returnCheckIn) {
+      headline = "Return Check-In Window is ACTIVE (DL 228)";
+      desc = "Check in online now for flight to Paris CDG. DTW departure in " + timeToRetDep.hours + "h " + timeToRetDep.minutes + "m.";
+      actionText = "Open Return Check-In";
+    }
+
     return {
       id: "RESIDENCY",
       step: 4,
-      name: "Royal Oak & Detroit Residency",
-      shortLabel: "ON THE GROUND",
-      statusClass: "status-live",
-      headline: "Royal Oak Operating Residency",
-      description: "Daily school coordination, family life, and curated Detroit cultural excursions via Woodward.",
-      primaryActionText: "View Today's Plan",
-      targetTab: "Today",
+      name: "Royal Oak & Return Prep",
+      shortLabel: now >= returnCheckIn ? "CHECK IN NOW" : "FINAL 3 DAYS",
+      statusClass: now >= returnCheckIn ? "status-action" : "status-live",
+      headline,
+      description: desc,
+      primaryActionText: actionText,
+      targetTab: now >= returnCheckIn ? "Plane Checklist" : "Today",
       activeLocationTz: "America/Detroit",
     };
   }

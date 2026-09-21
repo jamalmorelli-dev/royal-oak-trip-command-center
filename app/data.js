@@ -54,6 +54,37 @@ export const trip = {
       ['10:35 AM', 'DL8491 scheduled departure to Paris CDG.']
     ]
   },
+  returnPlane: {
+    checkInOpens: 'Wed Sep 23, 2026 @ 6:40 PM EDT (24h before DTW departure)',
+    departureTarget: 'Thu Sep 24, 2026 @ 6:40 PM EDT (Leave Royal Oak ~3:15–3:30 PM)',
+    primaryFlight: 'DL 0228 / Delta Main L — DTW 6:40 PM → CDG 8:40 AM (Sep 25)',
+    connection: 'AF 1258 / DL 8271 — CDG 11:15 AM → RBA 1:10 PM (Sep 25)',
+    baggage: 'Carry-on + 2 checked bags free (up to 23 kg / 50 lb each).',
+    airport: 'Detroit Metropolitan Wayne County Airport (DTW) — McNamara Terminal',
+    airportSequence: [
+      ['~3:15–3:30 PM (Thu Sep 24)', 'Leave Royal Oak base for DTW airport (approx. 35–45 min drive via I-75/I-94).'],
+      ['~4:15 PM', 'Arrive DTW McNamara Terminal (2h 25m buffer before 6:40 PM departure).'],
+      ['4:25 PM', 'Delta International Bag Drop: tag checked bags through to Rabat RBA. Confirm bag tag destination is RBA, NOT CDG.'],
+      ['4:45 PM', 'TSA Security screening. Keep liquids and laptop accessible.'],
+      ['5:15 PM', 'Gate arrival at McNamara Terminal. Final international boarding verification.'],
+      ['5:55 PM', 'Boarding begins for DL 228 (Delta Main Cabin).'],
+      ['6:40 PM', 'DL 228 scheduled departure from DTW to Paris CDG (approx. 8h flight).'],
+      ['8:40 AM (Fri Sep 25)', 'Land at Paris CDG Terminal 2E. 2h 35m international transit connection.'],
+      ['11:15 AM (Fri Sep 25)', 'AF 1258 scheduled departure from Paris CDG to Rabat RBA.'],
+      ['1:10 PM (Fri Sep 25)', 'Touch down at Rabat-Salé Airport (RBA, Morocco GMT+1). Ground transport home.']
+    ],
+    packingChecklist: [
+      'Original physical passport in personal travel wallet (BENJAMIN PRENTISS)',
+      'Boarding passes saved offline on phone & printed one-pager',
+      'Checked bag 1 weighed (<= 23 kg / 50 lb) with Royal Oak purchases & gifts',
+      'Checked bag 2 weighed (<= 23 kg / 50 lb)',
+      'Zero-Tolerance: Power banks & lithium battery packs inside carry-on luggage only',
+      'Prescription medicines & essential toiletries in carry-on',
+      'Travel adapter & charging cables in carry-on',
+      'House keys, wallet, cards & ID secure in personal item',
+      'Confirm ground transport to DTW McNamara Terminal for 3:15 PM Thu Sep 24'
+    ]
+  },
   budget: [
     ['Airfare', 1412.26],
     ['Groceries', 299],
