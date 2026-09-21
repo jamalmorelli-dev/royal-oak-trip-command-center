@@ -29,9 +29,13 @@ export default function PlaneChecklist() {
   const [returnCheckedIn, setReturnCheckedIn] = usePersistedState("ro-plane-user-return-checked-in", false);
   const [outboundCheckedIn, setOutboundCheckedIn] = usePersistedState("ro-plane-user-checked-in", true);
 
+  // Deterministic baseline date for SSR hydration parity
+  const BASELINE_DATE = new Date("2026-09-21T12:00:00-04:00");
+
   // Live timer tick
-  const [now, setNow] = useState(() => new Date());
+  const [now, setNow] = useState(BASELINE_DATE);
   useEffect(() => {
+    setNow(new Date());
     const timer = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
@@ -116,30 +120,30 @@ export default function PlaneChecklist() {
           <div className="grid" style={{ marginBottom: 16 }}>
             <div className="card" style={{ borderLeft: "4px solid var(--accent)" }}>
               <div className="label">RETURN CHECK-IN WINDOW</div>
-              <div className={"kpi " + returnStatus.cls} style={{ fontSize: 22, marginTop: 4 }}>
+              <div className={"kpi " + returnStatus.cls} style={{ fontSize: 22, marginTop: 4 }} suppressHydrationWarning>
                 {returnStatus.label}
               </div>
               {timeToReturnCheckIn.total > 0 && !returnCheckedIn && (
-                <div className="timer-grid">
+                <div className="timer-grid" suppressHydrationWarning>
                   <div className="timer-unit">
-                    <span className="timer-val">{timeToReturnCheckIn.days}</span>
+                    <span className="timer-val" suppressHydrationWarning>{timeToReturnCheckIn.days}</span>
                     <span className="timer-lbl">Days</span>
                   </div>
                   <div className="timer-unit">
-                    <span className="timer-val">{timeToReturnCheckIn.hours}</span>
+                    <span className="timer-val" suppressHydrationWarning>{timeToReturnCheckIn.hours}</span>
                     <span className="timer-lbl">Hours</span>
                   </div>
                   <div className="timer-unit">
-                    <span className="timer-val">{timeToReturnCheckIn.minutes}</span>
+                    <span className="timer-val" suppressHydrationWarning>{timeToReturnCheckIn.minutes}</span>
                     <span className="timer-lbl">Mins</span>
                   </div>
                   <div className="timer-unit">
-                    <span className="timer-val">{timeToReturnCheckIn.seconds}</span>
+                    <span className="timer-val" suppressHydrationWarning>{timeToReturnCheckIn.seconds}</span>
                     <span className="timer-lbl">Secs</span>
                   </div>
                 </div>
               )}
-              <div className="muted" style={{ fontSize: 13, marginTop: 6 }}>
+              <div className="muted" style={{ fontSize: 13, marginTop: 6 }} suppressHydrationWarning>
                 {returnStatus.detail}
               </div>
               <div style={{ marginTop: 8 }}>

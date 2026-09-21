@@ -57,11 +57,15 @@ function getTimeDiff(target, now) {
   return { days, hours, minutes, seconds, total: ms, passed: false };
 }
 
+// Deterministic baseline date for SSR hydration parity
+const BASELINE_DATE = new Date("2026-09-21T12:00:00-04:00");
+
 export default function FlightCountdown({ defaultMilestone = "checkin" }) {
   const [selectedId, setSelectedId] = useState(defaultMilestone);
-  const [now, setNow] = useState(() => new Date());
+  const [now, setNow] = useState(BASELINE_DATE);
 
   useEffect(() => {
+    setNow(new Date());
     const timer = setInterval(() => {
       setNow(new Date());
     }, 1000);
@@ -135,6 +139,7 @@ export default function FlightCountdown({ defaultMilestone = "checkin" }) {
             margin: "12px 0",
             textAlign: "center",
           }}
+          suppressHydrationWarning
         >
           <div
             style={{
@@ -152,6 +157,7 @@ export default function FlightCountdown({ defaultMilestone = "checkin" }) {
                 color: "var(--accent)",
                 lineHeight: 1,
               }}
+              suppressHydrationWarning
             >
               {String(diff.days).padStart(2, "0")}
             </div>
@@ -176,6 +182,7 @@ export default function FlightCountdown({ defaultMilestone = "checkin" }) {
                 color: "var(--ink-bright)",
                 lineHeight: 1,
               }}
+              suppressHydrationWarning
             >
               {String(diff.hours).padStart(2, "0")}
             </div>
@@ -200,6 +207,7 @@ export default function FlightCountdown({ defaultMilestone = "checkin" }) {
                 color: "var(--ink-bright)",
                 lineHeight: 1,
               }}
+              suppressHydrationWarning
             >
               {String(diff.minutes).padStart(2, "0")}
             </div>
@@ -224,6 +232,7 @@ export default function FlightCountdown({ defaultMilestone = "checkin" }) {
                 color: "var(--good)",
                 lineHeight: 1,
               }}
+              suppressHydrationWarning
             >
               {String(diff.seconds).padStart(2, "0")}
             </div>
@@ -242,6 +251,7 @@ export default function FlightCountdown({ defaultMilestone = "checkin" }) {
             textAlign: "center",
             margin: "12px 0",
           }}
+          suppressHydrationWarning
         >
           <div className="good" style={{ fontSize: 20, fontWeight: 800 }}>
             ✔ MILESTONE ACTIVE / COMPLETED

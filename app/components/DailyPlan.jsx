@@ -1,11 +1,19 @@
 'use client';
-import { useState, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { trip } from "../data";
 import { usePersistedState } from "../hooks/usePersistedState";
+
+// Deterministic baseline date for SSR hydration parity
+const BASELINE_DATE = new Date("2026-09-21T12:00:00-04:00");
 
 export default function DailyPlan() {
   const [completed, setCompleted] = usePersistedState("ro-daily-completed", {});
   const [showArchived, setShowArchived] = useState(false);
+  const [currentDate, setCurrentDate] = useState(BASELINE_DATE);
+
+  useEffect(() => {
+    setCurrentDate(new Date());
+  }, []);
 
   function toggle(dayIdx) {
     setCompleted((prev) => ({
@@ -16,14 +24,13 @@ export default function DailyPlan() {
 
   // Detect current day in America/Detroit
   const todayPrefix = useMemo(() => {
-    const now = new Date();
     const formatter = new Intl.DateTimeFormat("en-US", {
       timeZone: "America/Detroit",
       month: "short",
       day: "numeric",
     });
-    return formatter.format(now); // e.g. "Sep 21"
-  }, []);
+    return formatter.format(currentDate); // e.g. "Sep 21"
+  }, [currentDate]);
 
   // Split into active (Sep 21+) and past archived (before Sep 21)
   const { activeDays, pastDays } = useMemo(() => {

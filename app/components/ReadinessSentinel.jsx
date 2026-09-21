@@ -129,28 +129,35 @@ function playAudioTone(type = "alarm") {
 }
 
 export default function ReadinessSentinel() {
-  const [items, setItems] = useState(() => {
-    if (typeof window === "undefined") return INITIAL_READINESS_ITEMS;
+  const [items, setItems] = useState(() =>
+    INITIAL_READINESS_ITEMS.map((item) => ({
+      ...item,
+      checked: item.defaultChecked,
+    }))
+  );
+  const [hydrated, setHydrated] = useState(false);
+  const [alarmActive, setAlarmActive] = useState(false);
+
+  // Read persisted state on client mount after hydration
+  useEffect(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        return INITIAL_READINESS_ITEMS.map((item) => ({
-          ...item,
-          checked: parsed[item.id] !== undefined ? parsed[item.id] : item.defaultChecked,
-        }));
+        setItems(
+          INITIAL_READINESS_ITEMS.map((item) => ({
+            ...item,
+            checked: parsed[item.id] !== undefined ? parsed[item.id] : item.defaultChecked,
+          }))
+        );
       }
     } catch (e) {}
-    return INITIAL_READINESS_ITEMS.map((item) => ({
-      ...item,
-      checked: item.defaultChecked,
-    }));
-  });
+    setHydrated(true);
+  }, []);
 
-  const [alarmActive, setAlarmActive] = useState(false);
-
-  // Sync to localStorage
+  // Sync to localStorage only after hydration
   useEffect(() => {
+    if (!hydrated) return;
     try {
       const stateToSave = {};
       items.forEach((item) => {
@@ -158,7 +165,7 @@ export default function ReadinessSentinel() {
       });
       localStorage.setItem(STORAGE_KEY, JSON.stringify(stateToSave));
     } catch (e) {}
-  }, [items]);
+  }, [items, hydrated]);
 
   const toggleItem = useCallback((id) => {
     setItems((prev) => {
@@ -248,11 +255,12 @@ export default function ReadinessSentinel() {
             <span
               className={`pill ${pendingCount > 0 ? "bad pulse-badge" : "good"}`}
               style={{ fontSize: 10, fontWeight: 800 }}
+              suppressHydrationWarning
             >
               {pendingCount > 0 ? `${pendingCount} ALERTS PENDING` : "100% READY"}
             </span>
           </div>
-          <h3 style={{ margin: "4px 0 0", fontSize: 19 }}>
+          <h3 style={{ margin: "4px 0 0", fontSize: 19 }} suppressHydrationWarning>
             Pre-Flight Readiness &amp; Return Alarms ({completedCount}/{totalCount} Completed • {percent}%)
           </h3>
         </div>

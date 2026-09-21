@@ -1,5 +1,5 @@
 'use client';
-import { useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { trip } from "../data";
 import { getTimeRemaining, KEY_DATES } from "../lib/tripTime";
 import CopyButton from "./CopyButton";
@@ -20,8 +20,11 @@ function getTripTimezone(dateStr) {
   return "America/Detroit";
 }
 
-function getTodayInTrip() {
-  const now = new Date();
+// Deterministic baseline date for SSR hydration parity
+const BASELINE_DATE = new Date("2026-09-21T12:00:00-04:00");
+
+function getTodayInTrip(refDate = BASELINE_DATE) {
+  const now = refDate;
   const month = now.getMonth();
   const approxDay = now.getDate();
 
@@ -43,16 +46,20 @@ function getTodayInTrip() {
 }
 
 export default function TodayView({ onSelectTab }) {
-  const { dateStr, tz } = useMemo(() => getTodayInTrip(), []);
+  const [currentDate, setCurrentDate] = useState(BASELINE_DATE);
+  useEffect(() => {
+    setCurrentDate(new Date());
+  }, []);
+
+  const { dateStr, tz } = useMemo(() => getTodayInTrip(currentDate), [currentDate]);
 
   const todayMatch = useMemo(() => {
-    const now = new Date();
     const formatter = new Intl.DateTimeFormat("en-US", {
       timeZone: tz,
       month: "short",
       day: "numeric",
     });
-    const todayShort = formatter.format(now); // e.g. "Sep 15"
+    const todayShort = formatter.format(currentDate); // e.g. "Sep 15"
 
     const dayIndex = trip.days.findIndex((d) => {
       const dayLabel = d[0]; // "Sep 15 Tue"
@@ -60,18 +67,17 @@ export default function TodayView({ onSelectTab }) {
     });
 
     return dayIndex;
-  }, [tz]);
+  }, [tz, currentDate]);
 
   const todayFlights = useMemo(() => {
-    const now = new Date();
     const formatter = new Intl.DateTimeFormat("en-US", {
       timeZone: tz,
       month: "short",
       day: "numeric",
     });
-    const todayShort = formatter.format(now);
+    const todayShort = formatter.format(currentDate);
     return trip.flights.filter((f) => f[0].startsWith(todayShort));
-  }, [tz]);
+  }, [tz, currentDate]);
 
   const dayData = todayMatch >= 0 ? trip.days[todayMatch] : null;
   const isPreTrip = !dayData && new Date() < new Date("2026-09-14T00:00:00+01:00");
@@ -88,10 +94,10 @@ export default function TodayView({ onSelectTab }) {
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 8, marginBottom: 14 }}>
         <div>
           <div className="label">ACTIVE OPERATIONAL BRIEFING</div>
-          <h2 style={{ margin: "2px 0 0", fontSize: 24 }}>📅 {dateStr}</h2>
+          <h2 style={{ margin: "2px 0 0", fontSize: 24 }} suppressHydrationWarning>📅 {dateStr}</h2>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          <span className="pill good" style={{ fontSize: 11 }}>● LIVE TIMEZONE: {tz}</span>
+          <span className="pill good" style={{ fontSize: 11 }} suppressHydrationWarning>● LIVE TIMEZONE: {tz}</span>
         </div>
       </div>
 

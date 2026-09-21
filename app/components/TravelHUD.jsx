@@ -13,10 +13,14 @@ import {
   getTripPhase,
 } from "../lib/tripTime";
 
+// Deterministic baseline date for SSR hydration parity
+const BASELINE_DATE = new Date("2026-09-21T12:00:00-04:00");
+
 export default function TravelHUD({ onSelectTab, activeTab }) {
-  const [now, setNow] = useState(() => new Date());
+  const [now, setNow] = useState(BASELINE_DATE);
 
   useEffect(() => {
+    setNow(new Date());
     const timer = setInterval(() => {
       setNow(new Date());
     }, 1000);
@@ -149,8 +153,8 @@ export default function TravelHUD({ onSelectTab, activeTab }) {
                   <span className="hud-city">{item.city}</span>
                   {isCurrentLocation && <span className="hud-zone-pill">ACTIVE</span>}
                 </div>
-                <div className="hud-time">{timeStr}</div>
-                <div className="hud-date">
+                <div className="hud-time" suppressHydrationWarning>{timeStr}</div>
+                <div className="hud-date" suppressHydrationWarning>
                   {dateStr} • <span className="hud-code">{item.code}</span>
                 </div>
               </div>
@@ -160,93 +164,93 @@ export default function TravelHUD({ onSelectTab, activeTab }) {
       </div>
 
       {/* Dynamic Trip Status & Progress Hero */}
-      <div className={"hud-phase-banner " + phase.statusClass}>
+      <div className={"hud-phase-banner " + phase.statusClass} suppressHydrationWarning>
         <div className="hud-phase-main">
           <div className="hud-phase-header">
             <span className="hud-step-tag">STEP {phase.step} OF 5</span>
-            <span className="hud-phase-badge">{phase.shortLabel}</span>
+            <span className="hud-phase-badge" suppressHydrationWarning>{phase.shortLabel}</span>
           </div>
-          <h2 className="hud-phase-title">{phase.headline}</h2>
-          <p className="hud-phase-desc">{phase.description}</p>
+          <h2 className="hud-phase-title" suppressHydrationWarning>{phase.headline}</h2>
+          <p className="hud-phase-desc" suppressHydrationWarning>{phase.description}</p>
         </div>
 
-        <div className="hud-phase-timing">
+        <div className="hud-phase-timing" suppressHydrationWarning>
           {phase.id === "PRE_CHECKIN" && (
-            <div className="hud-timer-block">
+            <div className="hud-timer-block" suppressHydrationWarning>
               <span className="hud-timer-label">DELTA CHECK-IN COUNTDOWN</span>
-              <div className="timer-grid">
+              <div className="timer-grid" suppressHydrationWarning>
                 <div className="timer-unit">
-                  <span className="timer-val">{timeToCheckIn.days}</span>
+                  <span className="timer-val" suppressHydrationWarning>{timeToCheckIn.days}</span>
                   <span className="timer-lbl">Days</span>
                 </div>
                 <div className="timer-unit">
-                  <span className="timer-val">{timeToCheckIn.hours}</span>
+                  <span className="timer-val" suppressHydrationWarning>{timeToCheckIn.hours}</span>
                   <span className="timer-lbl">Hours</span>
                 </div>
                 <div className="timer-unit">
-                  <span className="timer-val">{timeToCheckIn.minutes}</span>
+                  <span className="timer-val" suppressHydrationWarning>{timeToCheckIn.minutes}</span>
                   <span className="timer-lbl">Mins</span>
                 </div>
                 <div className="timer-unit">
-                  <span className="timer-val">{timeToCheckIn.seconds}</span>
+                  <span className="timer-val" suppressHydrationWarning>{timeToCheckIn.seconds}</span>
                   <span className="timer-lbl">Secs</span>
                 </div>
               </div>
-              <div className="hud-subcountdown">
+              <div className="hud-subcountdown" suppressHydrationWarning>
                 Wheels up in: <strong>{timeToDeparture.days}d {timeToDeparture.hours}h {timeToDeparture.minutes}m</strong>
               </div>
             </div>
           )}
 
           {phase.id === "CHECKIN_WINDOW" && (
-            <div className="hud-timer-block">
+            <div className="hud-timer-block" suppressHydrationWarning>
               <span className="hud-timer-label pulse-badge" style={{ color: "var(--warn)", fontWeight: 800 }}>
                 ⚠️ FLIGHT DEPARTURE COUNTDOWN
               </span>
-              <div className="timer-grid">
+              <div className="timer-grid" suppressHydrationWarning>
                 <div className="timer-unit">
-                  <span className="timer-val">{timeToDeparture.hours}</span>
+                  <span className="timer-val" suppressHydrationWarning>{timeToDeparture.hours}</span>
                   <span className="timer-lbl">Hours</span>
                 </div>
                 <div className="timer-unit">
-                  <span className="timer-val">{timeToDeparture.minutes}</span>
+                  <span className="timer-val" suppressHydrationWarning>{timeToDeparture.minutes}</span>
                   <span className="timer-lbl">Mins</span>
                 </div>
                 <div className="timer-unit">
-                  <span className="timer-val">{timeToDeparture.seconds}</span>
+                  <span className="timer-val" suppressHydrationWarning>{timeToDeparture.seconds}</span>
                   <span className="timer-lbl">Secs</span>
                 </div>
               </div>
-              <div className="hud-subcountdown">
+              <div className="hud-subcountdown" suppressHydrationWarning>
                 Leave Fès by <strong>4:45 AM</strong>; arrive RBA desk by <strong>7:30 AM</strong>
               </div>
             </div>
           )}
 
           {phase.id === "RESIDENCY" && (
-            <div className="hud-timer-block">
+            <div className="hud-timer-block" suppressHydrationWarning>
               <span className="hud-timer-label" style={{ color: "var(--accent)" }}>
                 RETURN FLIGHT COUNTDOWN (DL 228)
               </span>
-              <div className="timer-grid">
+              <div className="timer-grid" suppressHydrationWarning>
                 <div className="timer-unit">
-                  <span className="timer-val">{timeToReturn.days}</span>
+                  <span className="timer-val" suppressHydrationWarning>{timeToReturn.days}</span>
                   <span className="timer-lbl">Days</span>
                 </div>
                 <div className="timer-unit">
-                  <span className="timer-val">{timeToReturn.hours}</span>
+                  <span className="timer-val" suppressHydrationWarning>{timeToReturn.hours}</span>
                   <span className="timer-lbl">Hours</span>
                 </div>
                 <div className="timer-unit">
-                  <span className="timer-val">{timeToReturn.minutes}</span>
+                  <span className="timer-val" suppressHydrationWarning>{timeToReturn.minutes}</span>
                   <span className="timer-lbl">Mins</span>
                 </div>
                 <div className="timer-unit">
-                  <span className="timer-val">{timeToReturn.seconds}</span>
+                  <span className="timer-val" suppressHydrationWarning>{timeToReturn.seconds}</span>
                   <span className="timer-lbl">Secs</span>
                 </div>
               </div>
-              <div className="hud-subcountdown">
+              <div className="hud-subcountdown" suppressHydrationWarning>
                 Check-in opens: <strong>Wed Sep 23 @ 6:40 PM EDT</strong> ({timeToReturnCheckIn.days}d {timeToReturnCheckIn.hours}h)
               </div>
             </div>
