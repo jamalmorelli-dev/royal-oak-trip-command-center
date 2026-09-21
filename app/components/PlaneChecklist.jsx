@@ -107,6 +107,11 @@ export default function PlaneChecklist() {
 
       {activeLeg === "return" && (
         <>
+          {/* Master Mission Countdown Timer — FRONT & CENTER */}
+          <div style={{ marginBottom: 16 }}>
+            <FlightCountdown defaultMilestone="checkin" />
+          </div>
+
           {/* Top Return Flight KPI Cards */}
           <div className="grid" style={{ marginBottom: 16 }}>
             <div className="card" style={{ borderLeft: "4px solid var(--accent)" }}>
@@ -280,11 +285,6 @@ export default function PlaneChecklist() {
               ))}
             </div>
           </section>
-
-          {/* Master Mission Countdown Timer */}
-          <div style={{ marginBottom: 16 }}>
-            <FlightCountdown defaultMilestone="checkin" />
-          </div>
 
           {/* Hour-by-Hour Flight Timeline Leading Up to Departure */}
           <section className="card section">

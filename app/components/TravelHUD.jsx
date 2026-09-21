@@ -83,9 +83,9 @@ export default function TravelHUD({ onSelectTab, activeTab }) {
             </div>
           </div>
           <div className="hud-code-item">
-            <span className="hud-label">OUTBOUND</span>
+            <span className="hud-label">RETURN FLIGHT</span>
             <div className="hud-code-val">
-              <span className="mono-code">DL 8491 • RBA→CDG→DTW</span>
+              <span className="mono-code">DL 228 • DTW➔CDG➔RBA</span>
             </div>
           </div>
         </div>

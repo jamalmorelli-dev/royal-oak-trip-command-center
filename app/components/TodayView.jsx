@@ -95,150 +95,13 @@ export default function TodayView({ onSelectTab }) {
         </div>
       </div>
 
+      {/* MASTER MISSION COUNTDOWN TIMER — FRONT & CENTER */}
+      <div style={{ marginBottom: 16 }}>
+        <FlightCountdown defaultMilestone="checkin" />
+      </div>
+
       {/* Aggressive Readiness Sentinel & Return Alarms */}
       <ReadinessSentinel />
-
-      {isPreTrip && (
-        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          {/* Pre-Trip Hero Card */}
-          <div
-            className="card"
-            style={{
-              background: "linear-gradient(135deg, rgba(88, 166, 255, 0.12) 0%, rgba(14, 21, 38, 0.9) 100%)",
-              border: "1px solid var(--accent)",
-              borderRadius: 16,
-              padding: 20,
-            }}
-          >
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
-              <div>
-                <span className="pill warn" style={{ fontSize: 11, fontWeight: 800 }}>
-                  PRE-DEPARTURE READINESS PHASE
-                </span>
-                <h3 style={{ margin: "6px 0 4px", fontSize: 20 }}>
-                  T-Minus {timeToCheckIn.days} Days to Check-In
-                </h3>
-                <p className="muted" style={{ margin: 0, fontSize: 14 }}>
-                  Outbound flight departs <strong>Monday, Sep 14 @ 10:35 AM</strong> from Rabat RBA.
-                  Online check-in opens <strong>Sunday, Sep 13 @ 10:35 AM</strong> (Morocco GMT+1).
-                </p>
-              </div>
-
-              {onSelectTab && (
-                <button
-                  type="button"
-                  className="hud-quick-btn no-print"
-                  onClick={() => onSelectTab("Plane Checklist")}
-                >
-                  Open Plane Checklist &amp; Rules →
-                </button>
-              )}
-            </div>
-
-            <div className="grid" style={{ marginTop: 16 }}>
-              <div className="card" style={{ background: "rgba(0, 0, 0, 0.25)" }}>
-                <div className="label">CHECK-IN OPENS IN</div>
-                <div className="kpi warn" style={{ fontSize: 22, marginTop: 4 }}>
-                  {timeToCheckIn.days}d {timeToCheckIn.hours}h {timeToCheckIn.minutes}m
-                </div>
-                <div className="muted" style={{ fontSize: 12, marginTop: 2 }}>
-                  Sunday Sep 13 @ 10:35 AM (GMT+1)
-                </div>
-              </div>
-
-              <div className="card" style={{ background: "rgba(0, 0, 0, 0.25)" }}>
-                <div className="label">WHEELS UP IN</div>
-                <div className="kpi" style={{ fontSize: 22, marginTop: 4 }}>
-                  {timeToDeparture.days}d {timeToDeparture.hours}h {timeToDeparture.minutes}m
-                </div>
-                <div className="muted" style={{ fontSize: 12, marginTop: 2 }}>
-                  Monday Sep 14 @ 10:35 AM (DL 8491)
-                </div>
-              </div>
-
-              <div className="card" style={{ background: "rgba(0, 0, 0, 0.25)" }}>
-                <div className="label">FÈS DEPARTURE TARGET</div>
-                <div className="kpi good" style={{ fontSize: 22, marginTop: 4 }}>
-                  04:45–05:00 AM
-                </div>
-                <div className="muted" style={{ fontSize: 12, marginTop: 2 }}>
-                  Target RBA desk by 07:00–07:30 AM
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Today's 3 High-Priority Actions */}
-          <div className="card">
-            <h3 style={{ margin: "0 0 12px", fontSize: 16, display: "flex", alignItems: "center", gap: 8 }}>
-              <span>⚡</span>
-              <span>Action Items for Today</span>
-            </h3>
-            <div className="grid">
-              <div style={{ background: "rgba(14, 21, 38, 0.6)", padding: 12, borderRadius: 12, border: "1px solid var(--line)" }}>
-                <div style={{ fontWeight: 700, color: "var(--ink-bright)", marginBottom: 4 }}>
-                  1. Physical Passport &amp; Travel Wallet
-                </div>
-                <div className="muted" style={{ fontSize: 13 }}>
-                  Verify original physical passport is in travel wallet under <strong>BENJAMIN PRENTISS</strong>. Never place in checked bag.
-                </div>
-              </div>
-
-              <div style={{ background: "rgba(14, 21, 38, 0.6)", padding: 12, borderRadius: 12, border: "1px solid var(--line)" }}>
-                <div style={{ fontWeight: 700, color: "var(--ink-bright)", marginBottom: 4 }}>
-                  2. Baggage Weigh-In &amp; Tags
-                </div>
-                <div className="muted" style={{ fontSize: 13 }}>
-                  First and second checked bags are free up to <strong>23 kg / 50 lb each</strong>. Tag bags with full contact info.
-                </div>
-              </div>
-
-              <div style={{ background: "rgba(14, 21, 38, 0.6)", padding: 12, borderRadius: 12, border: "1px solid var(--line)" }}>
-                <div style={{ fontWeight: 700, color: "var(--ink-bright)", marginBottom: 4 }}>
-                  3. Carry-On Electronics Rules
-                </div>
-                <div className="muted" style={{ fontSize: 13 }}>
-                  Keep phone chargers, medications, and <strong>power banks / battery packs</strong> inside carry-on luggage only.
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Outbound Itinerary Preview */}
-          <div className="card">
-            <h3 style={{ margin: "0 0 12px", fontSize: 16 }}>🛫 Monday Sep 14 Travel Schedule</h3>
-            <div style={{ overflowX: "auto" }}>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Flight</th>
-                    <th>Carrier</th>
-                    <th>Departure</th>
-                    <th>Arrival</th>
-                    <th>Class</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><strong>DL 8491</strong></td>
-                    <td>Air France</td>
-                    <td>Rabat RBA • 10:35 AM</td>
-                    <td>Paris CDG • 2:40 PM</td>
-                    <td><span className="pill">Economy X</span></td>
-                  </tr>
-                  <tr>
-                    <td><strong>DL 8719</strong></td>
-                    <td>Air France</td>
-                    <td>Paris CDG • 4:05 PM</td>
-                    <td>Detroit DTW • 6:50 PM</td>
-                    <td><span className="pill">Economy X</span></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      )}
 
       {isPostTrip && (
         <div className="card" style={{ borderColor: "var(--good)" }}>
@@ -295,11 +158,6 @@ export default function TodayView({ onSelectTab }) {
                 SMART Fixed Route: <span className="good" style={{ fontWeight: 700 }}>$0 (Free for Susu w/ student ID)</span>
               </div>
             </div>
-          </div>
-
-          {/* Master Mission Countdown Timer */}
-          <div style={{ marginTop: 16 }}>
-            <FlightCountdown defaultMilestone="checkin" />
           </div>
 
           {/* Upcoming 72-Hour Runway & Key Excursions */}
