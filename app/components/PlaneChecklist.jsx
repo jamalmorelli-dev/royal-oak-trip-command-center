@@ -3,6 +3,7 @@ import { useState, useEffect, useMemo } from "react";
 import { trip } from "../data";
 import CopyButton from "./CopyButton";
 import { usePersistedState } from "../hooks/usePersistedState";
+import FlightCountdown from "./FlightCountdown";
 
 function getTimeRemaining(targetDate, nowDate) {
   const ms = targetDate.getTime() - nowDate.getTime();
@@ -279,6 +280,11 @@ export default function PlaneChecklist() {
               ))}
             </div>
           </section>
+
+          {/* Master Mission Countdown Timer */}
+          <div style={{ marginBottom: 16 }}>
+            <FlightCountdown defaultMilestone="checkin" />
+          </div>
 
           {/* Hour-by-Hour Flight Timeline Leading Up to Departure */}
           <section className="card section">

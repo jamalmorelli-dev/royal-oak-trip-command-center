@@ -5,6 +5,7 @@ import { getTimeRemaining, KEY_DATES } from "../lib/tripTime";
 import CopyButton from "./CopyButton";
 import MapLink from "./MapLink";
 import ReadinessSentinel from "./ReadinessSentinel";
+import FlightCountdown from "./FlightCountdown";
 
 /**
  * Determine which timezone applies for a given date during the trip.
@@ -294,6 +295,11 @@ export default function TodayView({ onSelectTab }) {
                 SMART Fixed Route: <span className="good" style={{ fontWeight: 700 }}>$0 (Free for Susu w/ student ID)</span>
               </div>
             </div>
+          </div>
+
+          {/* Master Mission Countdown Timer */}
+          <div style={{ marginTop: 16 }}>
+            <FlightCountdown defaultMilestone="checkin" />
           </div>
 
           {/* Upcoming 72-Hour Runway & Key Excursions */}
