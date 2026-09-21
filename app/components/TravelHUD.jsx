@@ -28,9 +28,13 @@ export default function TravelHUD({ onSelectTab, activeTab }) {
   // Next milestone countdown
   const checkInTarget = useMemo(() => new Date(KEY_DATES.checkInOpen), []);
   const departureTarget = useMemo(() => new Date(KEY_DATES.departure), []);
+  const returnTarget = useMemo(() => new Date(KEY_DATES.returnDeparture), []);
+  const returnCheckInTarget = useMemo(() => new Date(KEY_DATES.returnCheckInOpen), []);
 
   const timeToCheckIn = useMemo(() => getTimeRemaining(checkInTarget, now), [checkInTarget, now]);
   const timeToDeparture = useMemo(() => getTimeRemaining(departureTarget, now), [departureTarget, now]);
+  const timeToReturn = useMemo(() => getTimeRemaining(returnTarget, now), [returnTarget, now]);
+  const timeToReturnCheckIn = useMemo(() => getTimeRemaining(returnCheckInTarget, now), [returnCheckInTarget, now]);
 
   const phasesList = [
     { num: 1, label: "Packing & Prep", dates: "Sep 11–12", id: "PRE_CHECKIN" },
@@ -215,6 +219,35 @@ export default function TravelHUD({ onSelectTab, activeTab }) {
               </div>
               <div className="hud-subcountdown">
                 Leave Fès by <strong>4:45 AM</strong>; arrive RBA desk by <strong>7:30 AM</strong>
+              </div>
+            </div>
+          )}
+
+          {phase.id === "RESIDENCY" && (
+            <div className="hud-timer-block">
+              <span className="hud-timer-label" style={{ color: "var(--accent)" }}>
+                RETURN FLIGHT COUNTDOWN (DL 228)
+              </span>
+              <div className="timer-grid">
+                <div className="timer-unit">
+                  <span className="timer-val">{timeToReturn.days}</span>
+                  <span className="timer-lbl">Days</span>
+                </div>
+                <div className="timer-unit">
+                  <span className="timer-val">{timeToReturn.hours}</span>
+                  <span className="timer-lbl">Hours</span>
+                </div>
+                <div className="timer-unit">
+                  <span className="timer-val">{timeToReturn.minutes}</span>
+                  <span className="timer-lbl">Mins</span>
+                </div>
+                <div className="timer-unit">
+                  <span className="timer-val">{timeToReturn.seconds}</span>
+                  <span className="timer-lbl">Secs</span>
+                </div>
+              </div>
+              <div className="hud-subcountdown">
+                Check-in opens: <strong>Wed Sep 23 @ 6:40 PM EDT</strong> ({timeToReturnCheckIn.days}d {timeToReturnCheckIn.hours}h)
               </div>
             </div>
           )}

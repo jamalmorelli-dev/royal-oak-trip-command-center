@@ -274,6 +274,71 @@ export default function TodayView({ onSelectTab }) {
               <div style={{ marginTop: 4, fontWeight: 600 }}>{dayData[5]}</div>
             </div>
           </div>
+
+          {/* Active Local Reference & Morning Commute Bar */}
+          <div className="card" style={{ marginTop: 16, background: "rgba(14, 21, 38, 0.75)", border: "1px solid var(--line)" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 8 }}>
+              <div>
+                <span className="label">COMMUTE &amp; SCHOOL REFERENCE</span>
+                <div style={{ fontWeight: 700, fontSize: 15, marginTop: 2 }}>
+                  {trip.school}
+                  <CopyButton text={trip.school} label="school address" />
+                  <MapLink address={trip.school} />
+                </div>
+              </div>
+              <div style={{ fontSize: 13, color: "var(--muted)" }}>
+                SMART Fixed Route: <span className="good" style={{ fontWeight: 700 }}>$0 (Free for Susu w/ student ID)</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Upcoming 72-Hour Runway & Key Excursions */}
+          <div className="card" style={{ marginTop: 16, borderLeft: "4px solid var(--accent)" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
+              <span style={{ fontSize: 20 }}>🧭</span>
+              <h3 style={{ margin: 0, fontSize: 16 }}>Upcoming 72-Hour Excursion &amp; Return Runway</h3>
+            </div>
+            <div className="grid">
+              <div style={{ background: "rgba(10, 16, 32, 0.6)", padding: 12, borderRadius: 12, border: "1px solid var(--line)" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
+                  <span className="pill" style={{ fontSize: 10 }}>TOMORROW</span>
+                  <strong>Tue Sep 22 • Detroit Evening</strong>
+                </div>
+                <div className="muted" style={{ fontSize: 13 }}>
+                  Casual Midtown, Downtown, Campus Martius &amp; Riverwalk stroll via FAST Woodward + Free QLINE.
+                </div>
+                <div className="warn" style={{ fontSize: 12, marginTop: 6, fontWeight: 700 }}>
+                  ⚠️ DIA closed at 4:00 PM (NO DIA). Keep evening casual.
+                </div>
+              </div>
+
+              <div style={{ background: "rgba(10, 16, 32, 0.6)", padding: 12, borderRadius: 12, border: "1px solid var(--line)" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
+                  <span className="pill warn" style={{ fontSize: 10 }}>CHECK-IN OPENS</span>
+                  <strong>Wed Sep 23 • Final Full Day</strong>
+                </div>
+                <div className="muted" style={{ fontSize: 13 }}>
+                  Celebratory dinner &amp; family evening.
+                </div>
+                <div className="good" style={{ fontSize: 12, marginTop: 6, fontWeight: 700 }}>
+                  ✈️ 6:40 PM EDT: Delta check-in opens for return flight DL 228.
+                </div>
+              </div>
+
+              <div style={{ background: "rgba(10, 16, 32, 0.6)", padding: 12, borderRadius: 12, border: "1px solid var(--line)" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
+                  <span className="pill bad" style={{ fontSize: 10 }}>TRAVEL DAY</span>
+                  <strong>Thu Sep 24 • Departure</strong>
+                </div>
+                <div className="muted" style={{ fontSize: 13 }}>
+                  Pack &amp; weigh bags (2x 23kg free). Leave Royal Oak ~3:15–3:30 PM for DTW.
+                </div>
+                <div style={{ fontSize: 12, marginTop: 6, color: "var(--ink-bright)" }}>
+                  DL 228 wheels up @ 6:40 PM EDT to Paris CDG.
+                </div>
+              </div>
+            </div>
+          </div>
         </>
       )}
 

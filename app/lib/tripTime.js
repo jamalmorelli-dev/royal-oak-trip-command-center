@@ -13,6 +13,7 @@ export const KEY_DATES = {
   checkInOpen: "2026-09-13T10:35:00+01:00",
   departure: "2026-09-14T10:35:00+01:00",
   detroitArrival: "2026-09-14T18:50:00-04:00",
+  returnCheckInOpen: "2026-09-23T18:40:00-04:00",
   returnDeparture: "2026-09-24T18:40:00-04:00",
   tripEnd: "2026-09-25T13:10:00+01:00",
 };
