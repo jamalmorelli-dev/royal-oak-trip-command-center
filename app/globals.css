@@ -1035,3 +1035,18 @@ tr:hover td {
     min-width: 620px;
   }
 }
+
+/* Aggressive Sentinel Pulse Alert */
+.pulse-border-alert {
+  animation: pulse-border 1s infinite alternate ease-in-out;
+}
+@keyframes pulse-border {
+  from {
+    box-shadow: 0 0 8px rgba(255, 68, 68, 0.4), 0 0 20px rgba(255, 68, 68, 0.2);
+    border-color: rgba(255, 68, 68, 0.8) !important;
+  }
+  to {
+    box-shadow: 0 0 25px rgba(255, 68, 68, 0.9), 0 0 45px rgba(255, 68, 68, 0.5);
+    border-color: #ff3333 !important;
+  }
+}

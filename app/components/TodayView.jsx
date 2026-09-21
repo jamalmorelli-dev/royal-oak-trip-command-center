@@ -4,6 +4,7 @@ import { trip } from "../data";
 import { getTimeRemaining, KEY_DATES } from "../lib/tripTime";
 import CopyButton from "./CopyButton";
 import MapLink from "./MapLink";
+import ReadinessSentinel from "./ReadinessSentinel";
 
 /**
  * Determine which timezone applies for a given date during the trip.
@@ -92,6 +93,9 @@ export default function TodayView({ onSelectTab }) {
           <span className="pill good" style={{ fontSize: 11 }}>● LIVE TIMEZONE: {tz}</span>
         </div>
       </div>
+
+      {/* Aggressive Readiness Sentinel & Return Alarms */}
+      <ReadinessSentinel />
 
       {isPreTrip && (
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>

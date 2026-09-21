@@ -8,6 +8,10 @@
     "export": "next build && touch out/.nojekyll",
     "deploy": "rm -rf out && next build && touch out/.nojekyll && cd out && git init -b gh-pages && git add -A && git commit -m 'Deploy to GitHub Pages' && git push -f https://github.com/jamalmorelli-dev/royal-oak-trip-command-center.git gh-pages",
     "test": "vitest run",
+    "alarm": "node bin/trip-sentinel.js --alarm",
+    "alarm:voice": "node bin/trip-sentinel.js --alarm --voice",
+    "sentinel": "node bin/trip-sentinel.js",
+    "check-off": "node bin/trip-sentinel.js --check",
     "check-flight": "node bin/check-flight.js",
     "start": "next start",
     "lint": "next lint"
