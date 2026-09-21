@@ -340,6 +340,16 @@ export default function TodayView({ onSelectTab }) {
                 <div style={{ fontSize: 12, marginTop: 6, color: "var(--ink-bright)" }}>
                   DL 228 wheels up @ 6:40 PM EDT to Paris CDG.
                 </div>
+                {onSelectTab && (
+                  <button
+                    type="button"
+                    className="hud-quick-btn no-print"
+                    style={{ marginTop: 8, fontSize: 11, padding: "4px 8px", width: "100%", justifyContent: "center" }}
+                    onClick={() => onSelectTab("Return Flight (DTW)")}
+                  >
+                    ⏱️ View Hour-by-Hour Timeline →
+                  </button>
+                )}
               </div>
             </div>
           </div>

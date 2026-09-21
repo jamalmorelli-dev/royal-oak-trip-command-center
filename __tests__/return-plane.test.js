@@ -23,6 +23,17 @@ describe("Return Flight Data Integrity", () => {
     expect(trip.returnPlane.packingChecklist).toContain("Original physical passport in personal travel wallet (BENJAMIN PRENTISS)");
   });
 
+  it("contains chronological hour-by-hour timeline leading up to departure", () => {
+    expect(trip.returnPlane.hourByHourTimeline).toBeDefined();
+    expect(trip.returnPlane.hourByHourTimeline.length).toBeGreaterThanOrEqual(15);
+    const times = trip.returnPlane.hourByHourTimeline.map(t => t[0]);
+    expect(times[0]).toContain("Wed Sep 23 • 6:40 PM");
+    expect(trip.returnPlane.hourByHourTimeline.some(t => t[2].includes("Delta Online Check-In Opens"))).toBe(true);
+    expect(trip.returnPlane.hourByHourTimeline.some(t => t[2].includes("Arrive DTW McNamara Terminal"))).toBe(true);
+    expect(trip.returnPlane.hourByHourTimeline.some(t => t[2].includes("DL 228 Takeoff"))).toBe(true);
+    expect(trip.returnPlane.hourByHourTimeline.some(t => t[2].includes("Touch Down at Rabat-Salé Airport"))).toBe(true);
+  });
+
   it("strictly omits ROHS, Ravens, Blue & Silver, and personal reimbursements", () => {
     const raw = JSON.stringify(trip.returnPlane).toLowerCase();
     expect(raw).not.toContain("rohs");

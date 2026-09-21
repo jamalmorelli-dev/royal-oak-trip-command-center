@@ -83,6 +83,28 @@ export const trip = {
       'Travel adapter & charging cables in carry-on',
       'House keys, wallet, cards & ID secure in personal item',
       'Confirm ground transport to DTW McNamara Terminal for 3:15 PM Thu Sep 24'
+    ],
+    hourByHourTimeline: [
+      ['Wed Sep 23 • 6:40 PM', 'CHECK-IN OPENS', 'Delta Online Check-In Opens (T-24h)', 'Check in via Delta app or delta.com for Benjamin Prentiss (PNR G82B6L). Confirm seats, receive mobile boarding pass, save offline screenshot.'],
+      ['Wed Sep 23 • 8:30 PM', 'EVENING PACK', 'Primary Luggage Weigh-In & Stage', 'Pack checked bags 1 & 2. Weigh both using luggage scale (max 23 kg / 50 lb each). Pack gifts and Royal Oak purchases in checked bags.'],
+      ['Wed Sep 23 • 10:30 PM', 'NIGHT BEFORE', 'Electronics & Document Audit', 'Ensure phone, backup battery packs, and devices are fully charged (100%). Put original passport and wallet in personal travel bag.'],
+      ['Thu Sep 24 • 08:00 AM', 'MORNING WAKE', 'Departure Day Wake-Up & Breakfast', 'Morning routine in Royal Oak. Light home breakfast. Review DL 228 flight status on Delta app for any gate or timing adjustments.'],
+      ['Thu Sep 24 • 10:00 AM', 'FINAL PACK', 'Bathroom Essentials & Toiletry Bag', 'Pack final morning toiletries, electric toothbrush, chargers into carry-on. Liquids in 1-quart transparent bag (3.4 oz / 100 ml max).'],
+      ['Thu Sep 24 • 12:00 PM', 'MIDDAY MEAL', 'Family Lunch & House Reset', 'Enjoy relaxing farewell lunch with Susu. Tidy up base living area. Final double check of closets, drawers, and under beds for chargers.'],
+      ['Thu Sep 24 • 01:30 PM', 'ZERO TOLERANCE', 'Lithium Battery & Carry-On Verification', 'FAA/TSA compliance: ALL power banks, external batteries, and laptops MUST be in carry-on bags. Zero lithium in checked luggage.'],
+      ['Thu Sep 24 • 02:30 PM', 'STAGE LUGGAGE', 'Bags by Front Door & Re-weigh Check', 'Stage 2 checked bags + 1 carry-on + 1 personal item at door. Re-verify bag tags with home address, name Benjamin Prentiss, and phone.'],
+      ['Thu Sep 24 • 03:00 PM', 'TRANSPORT READY', 'Driver / Ride Verification', 'Confirm ground transport arrival for 3:15 PM departure. Check live I-75 S / I-94 W traffic to DTW airport (normal travel time: 35–45 min).'],
+      ['Thu Sep 24 • 03:15 PM', 'WHEELS ROLLING', 'Depart Royal Oak for DTW Airport', 'Leave Royal Oak base (4322 Buckingham Rd area). Travel south towards Detroit Metropolitan Wayne County Airport (DTW).'],
+      ['Thu Sep 24 • 04:00 PM', 'AIRPORT ARRIVAL', 'Arrive DTW McNamara Terminal', 'Drop-off at McNamara Terminal Departures Level (Delta International). 2 hours 40 minutes buffer before 6:40 PM departure.'],
+      ['Thu Sep 24 • 04:15 PM', 'BAG DROP', 'Delta International Bag Drop & Tag Verification', 'Proceed to Delta Sky Priority / International Bag Drop. CRITICAL: Inspect physical bag tags to ensure final destination is printed as RBA (Rabat), NOT CDG.'],
+      ['Thu Sep 24 • 04:45 PM', 'TSA SECURITY', 'TSA Screening & Concourse Entry', 'Pass through TSA screening. Shoes/liquids protocol. Enter McNamara Concourse A (central water feature & tram concourse).'],
+      ['Thu Sep 24 • 05:15 PM', 'GATE ARRIVAL', 'Arrive at Departure Gate (Concourse A)', 'Locate DL 228 gate. Verify boarding zone (Main Cabin). Restroom break, water bottle refill, settle at gate.'],
+      ['Thu Sep 24 • 05:55 PM', 'BOARDING', 'DL 228 Boarding Begins', 'Boarding commences by zone (approx. 45 min before departure). Stow carry-on in overhead bin, keep personal item under seat.'],
+      ['Thu Sep 24 • 06:25 PM', 'DOORS CLOSE', 'Gate Doors Close & Pushback', 'All passengers seated. Cabin doors cross-check and pushback from McNamara gate.'],
+      ['Thu Sep 24 • 06:40 PM', 'WHEELS UP', 'DL 228 Takeoff: DTW ➔ CDG', 'Scheduled departure to Paris Charles de Gaulle. Flight time approx. 8 hours overnight transatlantic.'],
+      ['Fri Sep 25 • 08:40 AM', 'PARIS TRANSIT', 'Touchdown Paris CDG Terminal 2E', 'Land at CDG (8:40 AM CEST / 2:40 AM EDT). 2h 35m international transit connection to Air France AF 1258.'],
+      ['Fri Sep 25 • 11:15 AM', 'FINAL LEG', 'AF 1258 Departure: CDG ➔ RBA', 'Board Air France AF 1258 to Rabat-Salé Airport (flight duration approx. 2h 55m).'],
+      ['Fri Sep 25 • 01:10 PM', 'HOME TOUCHDOWN', 'Touch Down at Rabat-Salé Airport (RBA)', 'Touchdown in Morocco (GMT+1). Clear border police, collect 2 checked bags from baggage carousel, ground transport home.']
     ]
   },
   budget: [

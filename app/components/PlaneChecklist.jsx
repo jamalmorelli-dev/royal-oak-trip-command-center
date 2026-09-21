@@ -280,36 +280,62 @@ export default function PlaneChecklist() {
             </div>
           </section>
 
-          {/* DTW ➔ CDG ➔ RBA Step-by-Step Departure Sequence */}
+          {/* Hour-by-Hour Flight Timeline Leading Up to Departure */}
           <section className="card section">
-            <h2>DTW Airport departure sequence (Thu Sep 24)</h2>
-            <div className="muted" style={{ marginBottom: 12, fontSize: 13 }}>
-              Step-by-step itinerary from Royal Oak departure to touchdown in Rabat.
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 10, marginBottom: 12 }}>
+              <div>
+                <span className="label">HOUR-BY-HOUR DEPARTURE RUNWAY</span>
+                <h2 style={{ margin: "2px 0 0" }}>⏱️ Hour-by-Hour Timeline Leading Up to DL 228 Departure</h2>
+              </div>
+              <span className="pill good" style={{ fontSize: 11, fontWeight: 700 }}>
+                DTW McNamara ➔ Paris CDG ➔ Rabat RBA
+              </span>
             </div>
-            <div style={{ overflowX: "auto" }}>
-              <table>
-                <thead>
-                  <tr>
-                    <th style={{ width: "25%" }}>Time / Stage</th>
-                    <th>Action &amp; Rule</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {returnPlane.airportSequence.map((seq, i) => (
-                    <tr key={i}>
-                      <td><strong>{seq[0]}</strong></td>
-                      <td>
-                        {seq[1]}
-                        {seq[0].includes("Bag") && (
-                          <div className="warn" style={{ marginTop: 4, fontSize: 13 }}>
-                            <strong>⚠️ CRITICAL CHECK:</strong> Inspect printed bag tag destination before it rolls away. Confirm destination code is <strong>RBA</strong>.
-                          </div>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+
+            <div className="muted" style={{ marginBottom: 16, fontSize: 13 }}>
+              Chronological operational sequence from T-24h check-in, morning luggage staging, DTW airport arrival, TSA security, boarding, pushback, to Rabat touchdown.
+            </div>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              {(returnPlane.hourByHourTimeline || []).map((step, idx) => {
+                const [time, phase, action, detail] = step;
+                const isCritical = phase.includes("CHECK-IN") || phase.includes("BAG DROP") || phase.includes("ZERO") || phase.includes("WHEELS");
+                const isWarning = phase.includes("BAG DROP");
+                return (
+                  <div
+                    key={idx}
+                    style={{
+                      display: "flex",
+                      gap: 14,
+                      alignItems: "flex-start",
+                      background: isCritical ? "rgba(22, 33, 62, 0.85)" : "rgba(14, 21, 38, 0.5)",
+                      border: isWarning ? "1px solid var(--warn)" : isCritical ? "1px solid rgba(88, 166, 255, 0.4)" : "1px solid var(--line)",
+                      borderRadius: 12,
+                      padding: "12px 16px",
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    <div style={{ minWidth: 165, flexShrink: 0 }}>
+                      <div style={{ fontWeight: 800, fontSize: 13, color: "var(--ink-bright)" }}>{time}</div>
+                      <span
+                        className={`pill ${phase.includes("CHECK-IN") || phase.includes("BAG DROP") ? "warn" : phase.includes("ZERO") || phase.includes("WHEELS UP") ? "bad" : phase.includes("HOME") ? "good" : ""}`}
+                        style={{ fontSize: 10, padding: "2px 6px", marginTop: 4, display: "inline-block", fontWeight: 700 }}
+                      >
+                        {phase}
+                      </span>
+                    </div>
+                    <div style={{ flex: 1, minWidth: 240 }}>
+                      <div style={{ fontWeight: 700, fontSize: 14, color: "var(--ink-bright)" }}>{action}</div>
+                      <div className="muted" style={{ fontSize: 13, marginTop: 3 }}>{detail}</div>
+                      {isWarning && (
+                        <div className="warn" style={{ marginTop: 6, fontSize: 12, fontWeight: 700 }}>
+                          ⚠️ CRITICAL CHECK: Inspect printed bag tag destination before it rolls away. Confirm destination code is RBA (Rabat), NOT CDG.
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </section>
 
