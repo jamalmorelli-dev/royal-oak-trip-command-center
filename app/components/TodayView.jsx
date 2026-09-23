@@ -167,45 +167,33 @@ export default function TodayView({ onSelectTab }) {
           </div>
 
           {/* Upcoming 72-Hour Runway & Key Excursions */}
+          {/* Upcoming 72-Hour Excursion & Return Runway */}
           <div className="card" style={{ marginTop: 16, borderLeft: "4px solid var(--accent)" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
               <span style={{ fontSize: 20 }}>🧭</span>
-              <h3 style={{ margin: 0, fontSize: 16 }}>Upcoming 72-Hour Excursion &amp; Return Runway</h3>
+              <h3 style={{ margin: 0, fontSize: 16 }}>Upcoming 72-Hour Return Runway</h3>
             </div>
             <div className="grid">
-              <div style={{ background: "rgba(10, 16, 32, 0.6)", padding: 12, borderRadius: 12, border: "1px solid var(--line)" }}>
+              <div style={{ background: "rgba(10, 16, 32, 0.6)", padding: 12, borderRadius: 12, border: "1px solid var(--accent)" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
-                  <span className="pill" style={{ fontSize: 10 }}>TOMORROW</span>
-                  <strong>Tue Sep 22 • Detroit Evening</strong>
+                  <span className="pill warn pulse-badge" style={{ fontSize: 10, fontWeight: 800 }}>TODAY</span>
+                  <strong>Wed Sep 23 • Check-In Opens</strong>
                 </div>
                 <div className="muted" style={{ fontSize: 13 }}>
-                  Casual Midtown, Downtown, Campus Martius &amp; Riverwalk stroll via FAST Woodward + Free QLINE.
+                  Final full day in Royal Oak. Celebratory family dinner &amp; packing.
                 </div>
-                <div className="warn" style={{ fontSize: 12, marginTop: 6, fontWeight: 700 }}>
-                  ⚠️ DIA closed at 4:00 PM (NO DIA). Keep evening casual.
+                <div className="good" style={{ fontSize: 12, marginTop: 6, fontWeight: 800 }}>
+                  ✈️ 6:40 PM EDT: Delta online check-in opens for DL 228 (T-minus 11h).
                 </div>
               </div>
 
               <div style={{ background: "rgba(10, 16, 32, 0.6)", padding: 12, borderRadius: 12, border: "1px solid var(--line)" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
-                  <span className="pill warn" style={{ fontSize: 10 }}>CHECK-IN OPENS</span>
-                  <strong>Wed Sep 23 • Final Full Day</strong>
-                </div>
-                <div className="muted" style={{ fontSize: 13 }}>
-                  Celebratory dinner &amp; family evening.
-                </div>
-                <div className="good" style={{ fontSize: 12, marginTop: 6, fontWeight: 700 }}>
-                  ✈️ 6:40 PM EDT: Delta check-in opens for return flight DL 228.
-                </div>
-              </div>
-
-              <div style={{ background: "rgba(10, 16, 32, 0.6)", padding: 12, borderRadius: 12, border: "1px solid var(--line)" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
-                  <span className="pill bad" style={{ fontSize: 10 }}>TRAVEL DAY</span>
+                  <span className="pill bad" style={{ fontSize: 10, fontWeight: 800 }}>TOMORROW</span>
                   <strong>Thu Sep 24 • Departure</strong>
                 </div>
                 <div className="muted" style={{ fontSize: 13 }}>
-                  Pack &amp; weigh bags (2x 23kg free). Leave Royal Oak ~3:15–3:30 PM for DTW.
+                  Final weigh-in (2x 23kg free). Leave base ~3:15 PM for DTW McNamara.
                 </div>
                 <div style={{ fontSize: 12, marginTop: 6, color: "var(--ink-bright)" }}>
                   DL 228 wheels up @ 6:40 PM EDT to Paris CDG.
@@ -220,6 +208,19 @@ export default function TodayView({ onSelectTab }) {
                     ⏱️ View Hour-by-Hour Timeline →
                   </button>
                 )}
+              </div>
+
+              <div style={{ background: "rgba(10, 16, 32, 0.6)", padding: 12, borderRadius: 12, border: "1px solid var(--line)" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
+                  <span className="pill good" style={{ fontSize: 10, fontWeight: 800 }}>FRIDAY</span>
+                  <strong>Fri Sep 25 • Rabat Touchdown</strong>
+                </div>
+                <div className="muted" style={{ fontSize: 13 }}>
+                  Transit Paris CDG Terminal 2E to 2F. AF 1258 departs 11:15 AM CEST.
+                </div>
+                <div className="good" style={{ fontSize: 12, marginTop: 6, fontWeight: 700 }}>
+                  🇲🇦 Touchdown Rabat-Salé Airport (RBA) @ 1:10 PM GMT+1. Mission complete.
+                </div>
               </div>
             </div>
           </div>

@@ -13,9 +13,9 @@ import Budget from "./components/Budget";
 import AIConcierge from "./components/AIConcierge";
 
 const TAB_ITEMS = [
-  { id: "Today", label: "Today & Runway", icon: "📅", live: true, badge: "Sep 21" },
-  { id: "Plane Checklist", label: "Return Flight (DTW)", icon: "✈️", badge: "In 2d" },
-  { id: "Transport", label: "Detroit & Transit", icon: "🚌", badge: "Tue Eve" },
+  { id: "Today", label: "Today & Runway", icon: "📅", live: true, badge: "Sep 23" },
+  { id: "Plane Checklist", label: "Return Flight (DTW)", icon: "✈️", badge: "Check-In 6:40P" },
+  { id: "Transport", label: "Detroit & Transit", icon: "🚌" },
   { id: "Daily Plan", label: "Daily Plan", icon: "🗺️" },
   { id: "Budget", label: "Budget & Costs", icon: "💳" },
   { id: "Food & Shopping", label: "Food & Spots", icon: "🛍️" },
